@@ -709,15 +709,16 @@
         <div class="burst-field" id="burstField"></div>
       </div>
 
+      <!-- Cheer Progress Card starting from 0 -->
       <div class="applause-meter-card">
         <div>
-          <span class="applause-metric" id="applauseDisplay">3,699</span>
+          <span class="applause-metric" id="applauseDisplay">0</span>
           <span class="applause-subtext">claps sent with love ❤️</span>
         </div>
         <div class="progress-shell">
-          <div class="progress-fill" id="progressFill"></div>
+          <div class="progress-fill" id="progressFill" style="width: 0%;"></div>
         </div>
-        <span class="meter-milestone" id="meterMilestone">Goal: 3,800 Claps</span>
+        <span class="meter-milestone" id="meterMilestone">Goal: 50 Claps</span>
       </div>
     </div>
   </div>
@@ -808,32 +809,32 @@
   });
 
   // Applause Counter & Visual Progress Meter
+  // Applause Counter & Visual Progress Meter (Starts from 0)
   var ovationBtn = document.getElementById('ovationBtn');
   var burstField = document.getElementById('burstField');
   var applauseDisplay = document.getElementById('applauseDisplay');
   var progressFill = document.getElementById('progressFill');
   var meterMilestone = document.getElementById('meterMilestone');
 
-  var baseClaps = 3699;
-  var targetMilestone = 3800;
-  var savedClaps = localStorage.getItem('logiqids_claps_v2');
-  var clapCount = savedClaps ? parseInt(savedClaps, 10) : baseClaps;
+  var targetMilestone = 50; // Reachable goal
+  var savedClaps = localStorage.getItem('logiqids_claps_v3');
+  var clapCount = savedClaps ? parseInt(savedClaps, 10) : 0;
 
   function updateApplauseVisual() {
     applauseDisplay.textContent = clapCount.toLocaleString();
-    var progress = ((clapCount - baseClaps) / (targetMilestone - baseClaps)) * 100;
-    var percentage = Math.max(10, Math.min(100, progress));
+    var percentage = Math.min(100, (clapCount / targetMilestone) * 100);
     progressFill.style.width = percentage + '%';
 
     if (clapCount >= targetMilestone) {
       meterMilestone.textContent = '🎉 Milestone reached! Teachers are loved!';
       progressFill.style.background = 'linear-gradient(90deg, #86efac, #93c5fd, #d8b4fe)';
     } else {
-      var remaining = (targetMilestone - clapCount).toLocaleString();
-      meterMilestone.textContent = remaining + ' more claps to reach 3,800!';
+      var remaining = targetMilestone - clapCount;
+      meterMilestone.textContent = remaining + ' more claps to reach 50!';
     }
   }
 
+  // Set initial state (shows 0 until first click)
   updateApplauseVisual();
 
   function spawnFloatingBubble(originX) {
@@ -845,59 +846,9 @@
     setTimeout(function() { bubble.remove(); }, 850);
   }
 
-  function makeConfetto(originX){
-    var el = document.createElement('div');
-    var color = palette[Math.floor(Math.random() * palette.length)];
-    var isCircle = Math.random() > 0.5;
-    el.style.position = 'absolute';
-    el.style.left = originX + 'px';
-    el.style.top = '0px';
-    el.style.width = '10px';
-    el.style.height = '10px';
-    el.style.background = color;
-    el.style.borderRadius = isCircle ? '50%' : '3px';
-    el.style.pointerEvents = 'none';
-    var dx = (Math.random() - 0.5) * 260;
-    var dy = -(90 + Math.random() * 160);
-    var rot = (Math.random() - 0.5) * 500;
-    el.style.transition = reduceMotion ? 'none' : 'transform 1.15s cubic-bezier(.2,.7,.3,1), opacity 1.15s ease';
-    el.style.opacity = '1';
-    el.style.transform = 'translate(0,0) rotate(0deg)';
-    burstField.appendChild(el);
-    requestAnimationFrame(function(){
-      el.style.transform = 'translate(' + dx + 'px,' + dy + 'px) rotate(' + rot + 'deg)';
-      el.style.opacity = '0';
-    });
-    setTimeout(function(){ el.remove(); }, 1250);
-  }
-
-  function makeConfettoAt(x, y) {
-    var el = document.createElement('div');
-    var color = palette[Math.floor(Math.random() * palette.length)];
-    el.style.position = 'fixed';
-    el.style.left = x + 'px';
-    el.style.top = y + 'px';
-    el.style.width = '10px';
-    el.style.height = '10px';
-    el.style.background = color;
-    el.style.borderRadius = '50%';
-    el.style.pointerEvents = 'none';
-    el.style.zIndex = '10000';
-    var dx = (Math.random() - 0.5) * 450;
-    var dy = (Math.random() - 0.5) * 450;
-    el.style.transition = reduceMotion ? 'none' : 'transform 1.2s cubic-bezier(.2,.7,.3,1), opacity 1.2s ease';
-    el.style.opacity = '1';
-    document.body.appendChild(el);
-    requestAnimationFrame(function(){
-      el.style.transform = 'translate(' + dx + 'px,' + dy + 'px) rotate(360deg)';
-      el.style.opacity = '0';
-    });
-    setTimeout(function(){ el.remove(); }, 1250);
-  }
-
-  ovationBtn.addEventListener('click', function(){
+  ovationBtn.addEventListener('click', function() {
     clapCount++;
-    localStorage.setItem('logiqids_claps_v2', clapCount);
+    localStorage.setItem('logiqids_claps_v3', clapCount);
 
     applauseDisplay.classList.add('bump');
     setTimeout(function() { applauseDisplay.classList.remove('bump'); }, 150);
@@ -911,8 +862,8 @@
     spawnFloatingBubble(originX);
 
     var count = reduceMotion ? 6 : 18;
-    for(var i = 0; i < count; i++){
-      setTimeout(function(){ makeConfetto(originX); }, i * 16);
+    for (var i = 0; i < count; i++) {
+      setTimeout(function() { makeConfetto(originX); }, i * 16);
     }
   });
 
