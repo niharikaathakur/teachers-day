@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thank You, Teachers — LogIQids Educators Club</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito:wght@400;600;700;800&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    /* Soft Pastel Primary Palette */
+    --yellow: #fde68a;
+    --coral: #fca5a5;
+    --blue: #93c5fd;
+    --green: #86efac;
+    --purple: #d8b4fe;
+
+    /* Readable Slate Typography */
+    --navy: #334155;
+    --navy-soft: #64748b;
+
+    /* Pastel Accents */
+    --pink: #fbcfe8;
+    --mint: #a7f3d0;
+    --peach: #fed7aa;
+    --lilac: #e9d5ff;
+    --sky: #bae6fd;
+
+    /* Light Tinted Backgrounds */
+    --bg-hero: #fefce8;
+    --bg-time: #f0f9ff;
+    --bg-nums: #fff1f2;
+    --bg-letter: #faf5ff;
+    --bg-puzzle: #ecfdf5;
+  }
+
+  *{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  body{
+    margin:0;
+    font-family:'Nunito',sans-serif;
+    color:var(--navy);
+    background:var(--bg-hero);
+    overflow-x:hidden;
+  }
+  h1,h2,.display{
+    font-family:'Baloo 2',sans-serif;
+    font-weight:700;
+    line-height:1.08;
+    margin:0;
+    color:var(--navy);
+  }
+  .signature{ font-family:'Caveat',cursive; font-weight:700; }
+  p{ margin:0; }
+  .wrap{ max-width:700px; margin:0 auto; padding:0 28px; position:relative; z-index:2; }
+
+  section{ position:relative; padding:110px 0 150px; overflow:hidden; }
+  .wave-bottom{
+    position:absolute; left:0; right:0; bottom:-1px; line-height:0; z-index:1;
+  }
+  .wave-bottom svg{ width:100%; height:90px; display:block; }
+
+  /* ---------- decorative puzzle pieces ---------- */
+  svg.defs{ position:absolute; width:0; height:0; }
+  .piece{ position:absolute; opacity:0.85; z-index:0; }
+  .piece use{ fill:currentColor; }
+  @keyframes floaty{
+    0%,100%{ transform:translate(var(--px,0px),var(--py,0px)) rotate(var(--r,0deg)); }
+    50%{ transform:translate(var(--px,0px),calc(-22px + var(--py,0px))) rotate(calc(var(--r,0deg) + 8deg)); }
+  }
+  .piece{ animation:floaty 7s ease-in-out infinite; }
+
+  /* ---------- blobs ---------- */
+  .blob{
+    position:absolute;
+    filter:blur(40px);
+    opacity:0.55;
+    z-index:0;
+    animation:blobmove 12s ease-in-out infinite;
+  }
+  @keyframes blobmove{
+    0%,100%{ border-radius:42% 58% 65% 35% / 45% 40% 60% 55%; transform:scale(1) translate(var(--px,0px),var(--py,0px)); }
+    50%{ border-radius:60% 40% 38% 62% / 55% 65% 35% 45%; transform:scale(1.08) translate(calc(10px + var(--px,0px)),calc(-14px + var(--py,0px))); }
+  }
+
+  /* ---------- sparkles ---------- */
+  @keyframes twinkle{
+    0%,100%{ opacity:0; transform:scale(0.5) rotate(0deg); }
+    50%{ opacity:1; transform:scale(1.15) rotate(25deg); }
+  }
+  .sparkle{ position:absolute; z-index:0; animation:twinkle 2.6s ease-in-out infinite; pointer-events:none; }
+  .sparkle svg{ display:block; }
+
+  @keyframes glowPulse{
+    0%,100%{ box-shadow:0 8px 18px -8px rgba(253,230,138,0.7); }
+    50%{ box-shadow:0 12px 30px -2px rgba(253,230,138,1); }
+  }
+
+  @keyframes haloPulse{
+    0%{ transform:scale(1); opacity:0.55; }
+    100%{ transform:scale(2.3); opacity:0; }
+  }
+
+  @keyframes bob{
+    0%,100%{ transform:translateY(0); }
+    50%{ transform:translateY(-7px); }
+  }
+
+  @keyframes shimmer{
+    0%{ left:-60%; }
+    55%{ left:130%; }
+    100%{ left:130%; }
+  }
+
+  /* ---------- bouquet welcome modal ---------- */
+  .bouquet-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(254, 252, 232, 0.94);
+    backdrop-filter: blur(8px);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    opacity: 1;
+    transition: opacity 0.6s cubic-bezier(0.2, 0.8, 0.2, 1), visibility 0.6s;
+  }
+  .bouquet-overlay.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+  .bouquet-card {
+    background: #ffffff;
+    border-radius: 28px;
+    padding: 40px 32px 36px;
+    max-width: 440px;
+    width: 100%;
+    text-align: center;
+    box-shadow: 0 20px 45px -12px rgba(148, 163, 184, 0.25);
+    border: 3px solid var(--pink);
+    position: relative;
+    transform: scale(0.95);
+    animation: bouquetPop 0.65s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  }
+  @keyframes bouquetPop {
+    to { transform: scale(1); }
+  }
+  .bouquet-art {
+    width: 150px;
+    height: 150px;
+    margin: 0 auto 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    filter: drop-shadow(0 10px 14px rgba(252, 165, 165, 0.3));
+    animation: floatBouquet 3s ease-in-out infinite alternate;
+  }
+  @keyframes floatBouquet {
+    0% { transform: translateY(0) rotate(-2deg); }
+    100% { transform: translateY(-8px) rotate(2deg); }
+  }
+  .bouquet-card h3 {
+    font-family: 'Baloo 2', sans-serif;
+    font-size: 1.85rem;
+    font-weight: 800;
+    color: var(--navy);
+    margin: 0 0 10px;
+  }
+  .bouquet-card p {
+    font-size: 1.05rem;
+    color: var(--navy-soft);
+    line-height: 1.6;
+    margin-bottom: 24px;
+  }
+
+  /* ---------- hero ---------- */
+  .hero{ min-height:88vh; display:flex; align-items:center; text-align:center; padding-top:70px; }
+  .hero .wrap{ margin:0 auto; }
+  .badge{
+    display:inline-block;
+    background:var(--yellow);
+    color:var(--navy);
+    font-family:'Baloo 2',sans-serif;
+    font-weight:700;
+    font-size:0.95rem;
+    padding:10px 20px;
+    border-radius:30px;
+    transform:rotate(-3deg);
+    margin-bottom:34px;
+    box-shadow:0 8px 18px -8px rgba(253,230,138,0.7);
+    animation:glowPulse 2.8s ease-in-out infinite;
+  }
+  .hero h1{
+    font-size:clamp(2.6rem, 7vw, 4.7rem);
+    max-width:15ch;
+    margin:0 auto;
+  }
+  .hero h1 .hl{ color:var(--coral); }
+  .hero .sub{
+    max-width:44ch;
+    margin:24px auto 0;
+    font-size:1.2rem;
+    color:var(--navy-soft);
+    line-height:1.6;
+  }
+  .stamp{
+    display:inline-block;
+    margin-top:38px;
+    font-family:'Caveat',cursive;
+    font-weight:700;
+    font-size:1.5rem;
+    color:var(--purple);
+  }
+
+  /* ---------- section heading pattern ---------- */
+  .kicker{
+    font-family:'Baloo 2',sans-serif;
+    font-weight:700;
+    font-size:0.95rem;
+    padding:6px 16px;
+    border-radius:20px;
+    display:inline-block;
+    margin-bottom:16px;
+  }
+  .section-title{
+    font-size:clamp(1.9rem, 4.2vw, 2.7rem);
+    max-width:16ch;
+    margin-bottom:50px;
+  }
+
+  /* ---------- timeline ---------- */
+  .timeline{ position:relative; padding-left:38px; }
+  .timeline-line{
+    position:absolute; left:8px; top:6px; bottom:6px; width:4px;
+    background:linear-gradient(to bottom, var(--blue), var(--purple), var(--coral));
+    border-radius:4px;
+    transform:scaleY(0);
+    transform-origin:top;
+    transition:transform 1.4s cubic-bezier(.2,.8,.2,1);
+  }
+  .timeline.in-view .timeline-line{ transform:scaleY(1); }
+
+  .tl-item{ position:relative; padding-bottom:48px; opacity:0; transform:translateY(14px) scale(0.96); transition:opacity 0.5s ease, transform 0.5s cubic-bezier(.3,.9,.3,1.2); }
+  .timeline.in-view .tl-item{ opacity:1; transform:translateY(0) scale(1); }
+  .timeline.in-view .tl-item:nth-child(1){ transition-delay:0.15s; }
+  .timeline.in-view .tl-item:nth-child(2){ transition-delay:0.5s; }
+  .timeline.in-view .tl-item:nth-child(3){ transition-delay:0.85s; }
+  .timeline.in-view .tl-item:nth-child(4){ transition-delay:1.2s; }
+  .tl-item:last-child{ padding-bottom:0; }
+  .tl-item::before{
+    content:""; position:absolute; left:-38px; top:4px;
+    width:16px; height:16px; border-radius:50%;
+    background:var(--dot,var(--blue));
+    box-shadow:0 0 0 5px var(--bg-time);
+  }
+  .tl-item:nth-child(1){ --dot:var(--blue); }
+  .tl-item:nth-child(2){ --dot:var(--green); }
+  .tl-item:nth-child(3){ --dot:var(--purple); }
+  .tl-item:nth-child(4){ --dot:var(--coral); }
+  .tl-item::after{
+    content:""; position:absolute; left:-38px; top:4px;
+    width:16px; height:16px; border-radius:50%;
+    border:2px solid var(--dot,var(--blue));
+    opacity:0.5;
+    animation:haloPulse 2.2s ease-out infinite;
+  }
+  .tl-item:nth-child(2)::after{ animation-delay:0.5s; }
+  .tl-item:nth-child(3)::after{ animation-delay:1s; }
+  .tl-item:nth-child(4)::after{ animation-delay:1.5s; }
+  .tl-item .tl-date{
+    font-family:'Baloo 2',sans-serif; font-weight:700;
+    color:var(--dot,var(--blue));
+    font-size:1.05rem; display:block; margin-bottom:6px;
+  }
+  .tl-item p{ color:var(--navy-soft); line-height:1.65; max-width:50ch; font-size:1.03rem; }
+
+  /* ---------- numbers ---------- */
+  .numbers{ display:flex; flex-wrap:wrap; gap:50px 60px; justify-content:center; text-align:center; }
+  .stat{ position:relative; transition:transform 0.3s ease; }
+  .stat:nth-child(1){ transform:rotate(-2deg); }
+  .stat:nth-child(2){ transform:rotate(1.4deg); }
+  .stat:nth-child(3){ transform:rotate(-1deg); }
+  .stat:hover{ transform:scale(1.06) rotate(0deg); }
+  .stat-spark{ position:absolute; top:-16px; right:-10px; width:22px; height:22px; animation:bob 2.6s ease-in-out infinite; }
+  .stat:nth-child(1) .stat-spark{ color:var(--pink); }
+  .stat:nth-child(2) .stat-spark{ color:var(--sky); animation-delay:0.3s; }
+  .stat:nth-child(3) .stat-spark{ color:var(--mint); animation-delay:0.6s; }
+  .stat .num{ font-family:'Baloo 2',sans-serif; font-weight:800; font-size:clamp(2.6rem,6vw,3.7rem); display:block; }
+  .stat:nth-child(1) .num{ color:var(--coral); }
+  .stat:nth-child(2) .num{ color:var(--blue); }
+  .stat:nth-child(3) .num{ color:var(--green); }
+  .stat .label{ font-size:0.98rem; color:var(--navy-soft); margin-top:6px; display:block; font-weight:600; }
+
+  /* ---------- letter ---------- */
+  .letter p{
+    color:var(--navy-soft); line-height:1.75; font-size:1.08rem; max-width:58ch; margin-bottom:22px;
+    opacity:0; transform:translateY(16px); transition:opacity 0.6s ease, transform 0.6s ease;
+  }
+  .letter.in-view p{ opacity:1; transform:translateY(0); }
+  .letter.in-view p:nth-of-type(1){ transition-delay:0.05s; }
+  .letter.in-view p:nth-of-type(2){ transition-delay:0.25s; }
+  .letter.in-view p:nth-of-type(3){ transition-delay:0.45s; }
+  .letter.in-view p:nth-of-type(4){ transition-delay:0.65s; }
+  .letter p:last-of-type{ margin-bottom:0; }
+  .sign-off{ margin-top:44px; opacity:0; transform:translateY(16px); transition:opacity 0.6s ease 0.85s, transform 0.6s ease 0.85s; }
+  .letter.in-view .sign-off{ opacity:1; transform:translateY(0); }
+  .sign-off .signature{ font-size:2rem; color:var(--purple); display:block; }
+  .sign-off .role{ color:var(--navy-soft); font-size:0.92rem; margin-top:2px; display:block; }
+
+  /* ---------- puzzle box ---------- */
+  .puzzle-box{
+    position:relative;
+    border-radius:22px;
+    padding:3px;
+    max-width:540px;
+    background:conic-gradient(from var(--ang,0deg), var(--yellow), var(--coral), var(--pink), var(--purple), var(--blue), var(--mint), var(--green), var(--yellow));
+    animation:spin 6s linear infinite;
+  }
+  @keyframes spin{ to{ --ang:360deg; } }
+  @property --ang{ syntax:'<angle>'; inherits:false; initial-value:0deg; }
+  .puzzle-box-inner{
+    background:var(--bg-puzzle);
+    border-radius:20px;
+    padding:32px 28px;
+  }
+  .puzzle-box-inner .riddle{ color:var(--navy-soft); line-height:1.65; font-size:1.05rem; margin-bottom:22px; }
+  .btn{
+    position:relative;
+    overflow:hidden;
+    font-family:'Baloo 2',sans-serif; font-weight:700; font-size:1rem;
+    color:var(--navy); background:var(--coral); border:none;
+    padding:13px 26px; border-radius:30px; cursor:pointer;
+    transition:transform 0.2s cubic-bezier(.3,.9,.4,1.4), box-shadow 0.2s ease;
+    box-shadow:0 10px 22px -10px rgba(252,165,165,0.8);
+  }
+  .btn::after{
+    content:"";
+    position:absolute; top:0; left:-60%; width:40%; height:100%;
+    background:linear-gradient(120deg, transparent, rgba(255,255,255,0.6), transparent);
+    transform:skewX(-20deg);
+    animation:shimmer 3.4s ease-in-out infinite;
+    pointer-events:none;
+  }
+  .btn:hover{ transform:translateY(-3px) scale(1.04); }
+  .btn:active{ transform:translateY(0) scale(0.98); }
+  .btn-blue{ background:var(--blue); box-shadow:0 10px 22px -10px rgba(147,197,253,0.8); }
+
+  .answer{ margin-top:18px; color:var(--purple); font-weight:700; font-size:1.03rem; line-height:1.6; display:none; }
+  .answer.show{ display:block; animation:popIn 0.4s cubic-bezier(.3,.9,.3,1.4); }
+  @keyframes popIn{ 0%{ transform:scale(0.85); opacity:0; } 100%{ transform:scale(1); opacity:1; } }
+
+  /* ---------- applause counter & visual meter ---------- */
+  .ovation-row { margin-top:56px; text-align:center; position: relative; }
+  .ovation-row p { color:var(--navy-soft); margin-bottom:16px; font-weight:600; }
+  .clap-wrapper { position: relative; display: inline-block; }
+  
+  .clap-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 1.05rem;
+    padding: 14px 28px;
+  }
+  .clap-icon { font-size: 1.3rem; display: inline-block; transition: transform 0.15s ease; }
+  .clap-btn:active .clap-icon { transform: scale(1.3) rotate(-10deg); }
+
+  /* Floating +1 Bubble */
+  .clap-bubble {
+    position: absolute;
+    left: 50%;
+    top: -12px;
+    pointer-events: none;
+    font-family: 'Baloo 2', sans-serif;
+    font-weight: 800;
+    font-size: 1.05rem;
+    color: var(--navy);
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 2px 10px;
+    box-shadow: 0 6px 14px rgba(0,0,0,0.1);
+    animation: floatUp 0.85s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+    z-index: 10;
+  }
+  @keyframes floatUp {
+    0% { transform: translate(-50%, 0) scale(0.8); opacity: 0; }
+    25% { opacity: 1; transform: translate(-50%, -18px) scale(1.1); }
+    100% { transform: translate(-50%, -50px) scale(0.9); opacity: 0; }
+  }
+
+  /* Cheer Progress Card */
+  .applause-meter-card {
+    margin: 24px auto 0;
+    max-width: 320px;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(10px);
+    border: 2px solid #ffffff;
+    border-radius: 20px;
+    padding: 18px 22px;
+    box-shadow: 0 10px 25px -8px rgba(0, 0, 0, 0.05);
+  }
+  .applause-metric {
+    font-family: 'Baloo 2', sans-serif;
+    font-weight: 800;
+    font-size: 2rem;
+    color: var(--navy);
+    line-height: 1;
+    display: inline-block;
+    transition: transform 0.15s ease, color 0.15s ease;
+  }
+  .applause-metric.bump {
+    transform: scale(1.18);
+    color: #e06d6d;
+  }
+  .applause-subtext {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--navy-soft);
+    display: block;
+    margin-top: 4px;
+  }
+
+  .progress-shell {
+    width: 100%;
+    height: 12px;
+    background: #e2e8f0;
+    border-radius: 20px;
+    margin: 14px 0 8px;
+    overflow: hidden;
+    position: relative;
+  }
+  .progress-fill {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, var(--yellow), var(--coral), var(--purple));
+    border-radius: 20px;
+    transition: width 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  .meter-milestone {
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--navy-soft);
+    display: block;
+  }
+  .burst-field{ position:relative; height:0; }
+
+  /* ---------- closing ---------- */
+  .closing{
+    text-align:center; padding-bottom:90px;
+    background:linear-gradient(120deg, var(--yellow), var(--coral), var(--pink), var(--purple), var(--blue), var(--sky), var(--mint), var(--green), var(--yellow));
+    background-size:300% 300%;
+    animation:rainbow 10s ease infinite;
+  }
+  @keyframes rainbow{
+    0%{ background-position:0% 50%; } 50%{ background-position:100% 50%; } 100%{ background-position:0% 50%; }
+  }
+  .closing h2{ color:var(--navy); font-size:clamp(2.2rem,5vw,3.1rem); text-shadow:0 4px 18px rgba(255,255,255,0.3); }
+  .closing .sub{ color:var(--navy); max-width:40ch; margin:20px auto 0; line-height:1.6; font-weight:700; font-size:1.1rem; }
+  .closing .foot-note{ margin-top:40px; font-family:'Caveat',cursive; font-weight:700; font-size:1.5rem; color:var(--navy); display:block; }
+  .closing .star{ animation:spin2 4s linear infinite; display:inline-block; margin-bottom:16px; }
+  @keyframes spin2{ to{ transform:rotate(360deg); } }
+  .confetti-fall{ position:absolute; inset:0; overflow:hidden; pointer-events:none; z-index:0; }
+  .confetti-fall span{
+    position:absolute; top:-20px; width:10px; height:10px; opacity:0.85;
+    animation:fall linear infinite;
+  }
+  @keyframes fall{ to{ transform:translateY(120vh) rotate(360deg); } }
+
+  @media (max-width:640px){
+    section{ padding:80px 0 110px; }
+    .numbers{ gap:34px 34px; }
+    .piece{ transform:scale(0.7); }
+    .bouquet-card{ padding:30px 22px; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ animation:none !important; transition:none !important; }
+    html{ scroll-behavior:auto; }
+    .tl-item, .letter p, .sign-off{ opacity:1 !important; transform:none !important; }
+    .timeline-line{ transform:scaleY(1) !important; }
+    .sparkle{ opacity:0.7 !important; }
+    .tl-item::after{ opacity:0.3 !important; transform:none !important; }
+    .bouquet-art{ animation:none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- BOUQUET OPENING MODAL (REAPPEARS EVERY REFRESH) -->
+<div class="bouquet-overlay" id="bouquetOverlay">
+  <div class="bouquet-card">
+    <div class="bouquet-art">
+      <svg viewBox="0 0 160 160" width="100%" height="100%">
+        <!-- Wrapping Paper -->
+        <polygon points="50,148 110,148 128,88 32,88" fill="#fde68a" stroke="#fed7aa" stroke-width="2"/>
+        <polygon points="58,148 102,148 120,96 40,96" fill="#fed7aa" opacity="0.4"/>
+        <!-- Stems -->
+        <path d="M80,95 L80,60" stroke="#86efac" stroke-width="4" stroke-linecap="round"/>
+        <path d="M70,95 L55,55" stroke="#86efac" stroke-width="4" stroke-linecap="round"/>
+        <path d="M90,95 L105,55" stroke="#86efac" stroke-width="4" stroke-linecap="round"/>
+        <!-- Flowers -->
+        <!-- Center Pink Peony -->
+        <circle cx="80" cy="50" r="18" fill="#fca5a5"/>
+        <circle cx="74" cy="46" r="12" fill="#fbcfe8"/>
+        <circle cx="86" cy="46" r="12" fill="#fbcfe8"/>
+        <circle cx="80" cy="52" r="9" fill="#fed7aa"/>
+        <!-- Left Lavender Tulip -->
+        <path d="M42,50 C42,32 66,32 66,50 C66,62 42,62 42,50 Z" fill="#d8b4fe"/>
+        <circle cx="54" cy="46" r="6" fill="#e9d5ff"/>
+        <!-- Right Sky-blue Daisy -->
+        <circle cx="108" cy="48" r="16" fill="#93c5fd"/>
+        <circle cx="108" cy="48" r="8" fill="#fde68a"/>
+        <!-- Leaves -->
+        <path d="M40,84 C30,76 36,66 48,72 C48,82 42,84 40,84 Z" fill="#86efac"/>
+        <path d="M120,84 C130,76 124,66 112,72 C112,82 118,84 120,84 Z" fill="#86efac"/>
+        <!-- Ribbon Bow -->
+        <ellipse cx="70" cy="116" rx="12" ry="7" fill="#fca5a5" transform="rotate(-15 70 116)"/>
+        <ellipse cx="90" cy="116" rx="12" ry="7" fill="#fca5a5" transform="rotate(15 90 116)"/>
+        <circle cx="80" cy="116" r="5" fill="#f87171"/>
+        <path d="M78,120 L72,136 M82,120 L88,136" stroke="#fca5a5" stroke-width="3" stroke-linecap="round"/>
+      </svg>
+    </div>
+    <h3>A Bouquet for You, Teacher! 💐</h3>
+    <p>Happy Teachers' Day! LogIQids Educators Club is celebrating 1 year today, and this special token of gratitude is for you.</p>
+    <button class="btn btn-blue" id="openBouquetBtn" style="font-size:1.05rem; padding:14px 32px;">
+      Accept Bouquet & Enter 🌸
+    </button>
+  </div>
+</div>
+
+<svg class="defs">
+  <symbol id="piece" viewBox="-25 -25 150 150">
+    <path d="M0,0 L35,0 C35,-18 65,-18 65,0 L100,0 L100,35 C82,35 82,65 100,65 L100,100 L65,100 C65,118 35,118 35,100 L0,100 L0,65 C18,65 18,35 0,35 Z"/>
+  </symbol>
+  <symbol id="sparkle" viewBox="0 0 24 24">
+    <path d="M12 0 C12 6 14 10 20 12 C14 14 12 18 12 24 C12 18 10 14 4 12 C10 10 12 6 12 0 Z"/>
+  </symbol>
+</svg>
+
+<!-- HERO -->
+<section class="hero" style="background:var(--bg-hero);">
+  <div class="blob" style="width:340px;height:340px;background:var(--yellow);top:-80px;left:-100px;"></div>
+  <div class="blob" style="width:280px;height:280px;background:var(--blue);bottom:-60px;right:-80px;animation-delay:-4s;"></div>
+  <div class="blob" style="width:220px;height:220px;background:var(--coral);top:20%;right:6%;animation-delay:-8s;opacity:0.35;"></div>
+  <div class="blob" style="width:180px;height:180px;background:var(--pink);top:38%;left:2%;animation-delay:-6s;opacity:0.3;"></div>
+
+  <svg class="piece" style="width:56px;height:56px;top:14%;left:8%;color:var(--coral);--r:-8deg;" viewBox="-25 -25 150 150"><use href="#piece"/></svg>
+  <svg class="piece" style="width:70px;height:70px;bottom:12%;left:12%;color:var(--purple);--r:14deg;animation-delay:-2s;" viewBox="-25 -25 150 150"><use href="#piece"/></svg>
+  <svg class="piece" style="width:48px;height:48px;top:20%;right:10%;color:var(--green);--r:20deg;animation-delay:-4s;" viewBox="-25 -25 150 150"><use href="#piece"/></svg>
+  <svg class="piece" style="width:60px;height:60px;bottom:18%;right:8%;color:var(--yellow);--r:-16deg;animation-delay:-5.5s;" viewBox="-25 -25 150 150"><use href="#piece"/></svg>
+
+  <span class="sparkle" style="top:10%;right:26%;width:22px;height:22px;color:var(--pink);animation-delay:-1s;"><svg viewBox="0 0 24 24" fill="currentColor"><use href="#sparkle"/></svg></span>
+  <span class="sparkle" style="bottom:26%;left:28%;width:18px;height:18px;color:var(--mint);animation-delay:-2.1s;"><svg viewBox="0 0 24 24" fill="currentColor"><use href="#sparkle"/></svg></span>
+  <span class="sparkle" style="top:30%;right:16%;width:14px;height:14px;color:var(--sky);animation-delay:-0.4s;"><svg viewBox="0 0 24 24" fill="currentColor"><use href="#sparkle"/></svg></span>
+  <span class="sparkle" style="bottom:10%;right:32%;width:16px;height:16px;color:var(--peach);animation-delay:-1.6s;"><svg viewBox="0 0 24 24" fill="currentColor"><use href="#sparkle"/></svg></span>
+
+  <div class="wrap">
+    <span class="badge">LogIQids Educators Club</span>
+    <h1>Thank you, <span class="hl">teachers.</span></h1>
+    <p class="sub">This Teachers&rsquo; Day, our little community turns one &mdash; and every bit of what it became belongs to you.</p>
+    <span class="stamp">Sept 5, 2025 &rarr; Sept 5, 2026</span>
+  </div>
+
+  <div class="wave-bottom">
+    <svg viewBox="0 0 1440 90" preserveAspectRatio="none">
+      <defs><linearGradient id="waveHero" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0%" style="stop-color:var(--sky)"/>
+        <stop offset="100%" style="stop-color:var(--blue)"/>
+      </linearGradient></defs>
+      <path d="M0,40 C240,90 480,0 720,30 C960,60 1200,10 1440,50 L1440,90 L0,90 Z" fill="url(#waveHero)"/>
+    </svg>
+  </div>
+</section>
+
+<!-- JOURNEY -->
+<section style="background:var(--bg-time);">
+  <svg class="piece" style="width:44px;height:44px;top:9%;right:9%;color:var(--sky);--r:12deg;" viewBox="-25 -25 150 150"><use href="#piece"/></svg>
+  <svg class="piece" style="width:36px;height:36px;bottom:12%;left:6%;color:var(--purple);--r:-14deg;animation-delay:-3.5s;" viewBox="-25 -25 150 150"><use href="#piece"/></svg>
+  <span class="sparkle" style="top:18%;left:12%;width:20px;height:20px;color:var(--pink);animation-delay:-1s;"><svg viewBox="0 0 24 24" fill="currentColor"><use href="#sparkle"/></svg></span>
+  <span class="sparkle" style="bottom:22%;right:14%;width:16px;height:16px;color:var(--mint);animation-delay:-2s;"><svg viewBox="0 0 24 24" fill="currentColor"><use href="#sparkle"/></svg></span>
+  <span class="sparkle" style="top:44%;right:5%;width:14px;height:14px;color:var(--yellow);animation-delay:-0.5s;"><svg viewBox="0 0 24 24" fill="currentColor"><use href="#sparkle"/></svg></span>
+  <div class="wrap">
+    <span class="kicker" style="background:var(--blue);color:var(--navy);">Looking back</span>
+    <h2 class="section-title">How the year unfolded</h2>
+    <div class="timeline" id="timeline">
+      <div class="timeline-line"></div>
+      <div class="tl-item">
+        <span class="tl-date">Sept 5, 2025</span>
+        <p>A small circle of teachers who loved a good puzzle as much as their students did. LogIQids Educators Club was born, on Teachers&rsquo; Day, of all days.</p>
+      </div>
+      <div class="tl-item">
+        <span class="tl-date">Week one</span>
+        <p>The first Puzzle of the Week landed on a Saturday morning. Nobody was quite sure if a room full of educators would stop to solve riddles on a weekend &mdash; you did, over your Saturday chai.</p>
+      </div>
+      <div class="tl-item">
+        <span class="tl-date">All year long</span>
+        <p>A new puzzle, every Saturday, without fail. And every time, you showed up &mdash; solving, comparing answers, sneaking a few onto your own classroom board.</p>
+      </div>
+      <div class="tl-item">
+        <span class="tl-date">Today</span>
+        <p>3,699 teachers strong. Still one community. Still endlessly curious.</p>
+      </div>
+    </div>
+  </div>
+  <div class="wave-bottom">
+    <svg viewBox="0 0 1440 90" preserveAspectRatio="none">
+      <defs><linearGradient id="waveJourney" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0%" style="stop-color:var(--peach)"/>
+        <stop offset="100%" style="stop-color:var(--coral)"/>
+      </linearGradient></defs>
+      <path d="M0,50 C240,10 480,90 720,50 C960,10 1200,80 1440,30 L1440,90 L0,90 Z" fill="url(#waveJourney)"/>
+    </svg>
+  </div>
+</section>
+
+<!-- NUMBERS -->
+<section style="background:var(--bg-nums);">
+  <div class="blob" style="width:260px;height:260px;background:var(--coral);top:-60px;right:-70px;opacity:0.3;"></div>
+  <svg class="piece" style="width:50px;height:50px;top:10%;left:6%;color:var(--blue);--r:10deg;" viewBox="-25 -25 150 150"><use href="#piece"/></svg>
+  <svg class="piece" style="width:44px;height:44px;bottom:10%;right:10%;color:var(--yellow);--r:-12deg;animation-delay:-3s;" viewBox="-25 -25 150 150"><use href="#piece"/></svg>
+  <span class="sparkle" style="top:14%;right:20%;width:18px;height:18px;color:var(--lilac);animation-delay:-1.2s;"><svg viewBox="0 0 24 24" fill="currentColor"><use href="#sparkle"/></svg></span>
+  <span class="sparkle" style="bottom:16%;left:18%;width:16px;height:16px;color:var(--sky);animation-delay:-2.3s;"><svg viewBox="0 0 24 24" fill="currentColor"><use href="#sparkle"/></svg></span>
+  <div class="wrap">
+    <span class="kicker" style="background:var(--coral);color:var(--navy);">In one year</span>
+    <h2 class="section-title">The tally on the board</h2>
+    <div class="numbers" id="numbers">
+      <div class="stat">
+        <span class="stat-spark"><svg viewBox="0 0 24 24" fill="currentColor"><use href="#sparkle"/></svg></span>
+        <span class="num" data-target="3699">0</span><span class="label">teachers in the club</span>
+      </div>
+      <div class="stat">
+        <span class="stat-spark"><svg viewBox="0 0 24 24" fill="currentColor"><use href="#sparkle"/></svg></span>
+        <span class="num" data-target="365">0</span><span class="label">days of showing up</span>
+      </div>
+      <div class="stat">
+        <span class="stat-spark"><svg viewBox="0 0 24 24" fill="currentColor"><use href="#sparkle"/></svg></span>
+        <span class="num" data-target="52">0</span><span class="label">Saturdays, 52 puzzles</span>
+      </div>
+    </div>
+  </div>
+  <div class="wave-bottom">
+    <svg viewBox="0 0 1440 90" preserveAspectRatio="none">
+      <defs><linearGradient id="waveNumbers" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0%" style="stop-color:var(--lilac)"/>
+        <stop offset="100%" style="stop-color:var(--purple)"/>
+      </linearGradient></defs>
+      <path d="M0,30 C240,80 480,0 720,40 C960,80 1200,20 1440,60 L1440,90 L0,90 Z" fill="url(#waveNumbers)"/>
+    </svg>
+  </div>
+</section>
+
+<!-- LETTER -->
+<section class="letter" id="letter" style="background:var(--bg-letter);">
+  <div class="blob" style="width:200px;height:200px;background:var(--lilac);top:-40px;right:-60px;opacity:0.35;"></div>
+  <div class="blob" style="width:160px;height:160px;background:var(--pink);bottom:0;left:-60px;opacity:0.25;animation-delay:-5s;"></div>
+  <span class="sparkle" style="top:8%;left:6%;width:18px;height:18px;color:var(--pink);animation-delay:-1.5s;"><svg viewBox="0 0 24 24" fill="currentColor"><use href="#sparkle"/></svg></span>
+  <span class="sparkle" style="bottom:14%;right:8%;width:16px;height:16px;color:var(--sky);animation-delay:-2.2s;"><svg viewBox="0 0 24 24" fill="currentColor"><use href="#sparkle"/></svg></span>
+  <div class="wrap">
+    <span class="kicker" style="background:var(--purple);color:var(--navy);">A note to you</span>
+    <h2 class="section-title">Before we say anything else</h2>
+    <p>When we started this club, we hoped a handful of teachers might enjoy a puzzle on a Saturday morning. We didn&rsquo;t expect a community.</p>
+    <p>But that is exactly what you built. Every time you solved something before your first cup of coffee finished, forwarded a puzzle to a colleague down the hall, or told us it ended up sketched on your classroom board &mdash; you turned a small idea into something we&rsquo;re genuinely proud of.</p>
+    <p>Teaching is the hardest kind of problem-solving there is, done every single day, for other people&rsquo;s children, often with far too little thanks. So today, just for a moment, we wanted to turn that around.</p>
+    <p>Thank you for showing up. Thank you for staying curious. Thank you for being the kind of teacher who still makes time for a good puzzle.</p>
+    <div class="sign-off">
+      <span class="signature">With gratitude,</span>
+      <span class="signature">The LogIQids Team</span>
+    </div>
+  </div>
+  <div class="wave-bottom">
+    <svg viewBox="0 0 1440 90" preserveAspectRatio="none">
+      <defs><linearGradient id="waveLetter" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0%" style="stop-color:var(--mint)"/>
+        <stop offset="100%" style="stop-color:var(--green)"/>
+      </linearGradient></defs>
+      <path d="M0,60 C240,10 480,90 720,40 C960,0 1200,70 1440,20 L1440,90 L0,90 Z" fill="url(#waveLetter)"/>
+    </svg>
+  </div>
+</section>
+
+<!-- INTERACTIVE -->
+<section style="background:var(--bg-puzzle);">
+  <svg class="piece" style="width:54px;height:54px;top:8%;right:8%;color:var(--purple);--r:-10deg;" viewBox="-25 -25 150 150"><use href="#piece"/></svg>
+  <svg class="piece" style="width:40px;height:40px;bottom:14%;left:8%;color:var(--coral);--r:16deg;animation-delay:-2.5s;" viewBox="-25 -25 150 150"><use href="#piece"/></svg>
+  <span class="sparkle" style="top:16%;left:14%;width:18px;height:18px;color:var(--pink);animation-delay:-0.8s;"><svg viewBox="0 0 24 24" fill="currentColor"><use href="#sparkle"/></svg></span>
+  <span class="sparkle" style="bottom:20%;right:16%;width:16px;height:16px;color:var(--sky);animation-delay:-1.9s;"><svg viewBox="0 0 24 24" fill="currentColor"><use href="#sparkle"/></svg></span>
+  <div class="wrap">
+    <span class="kicker" style="background:var(--green);color:var(--navy);">One more, for the road</span>
+    <h2 class="section-title">A tiny puzzle, just for you</h2>
+
+    <div class="puzzle-box">
+      <div class="puzzle-box-inner">
+        <p class="riddle">I have keys but no locks. I have space but no rooms. You can enter, but you can never go outside. What am I?</p>
+        <button class="btn btn-blue" id="revealBtn">Reveal the answer</button>
+        <p class="answer" id="answerText">A keyboard. Of course you got it &mdash; puzzle-solving is basically your second job now.</p>
+      </div>
+    </div>
+
+    <!-- Applause & Cheer Meter -->
+    <div class="ovation-row">
+      <p>Got a second? Send the club a little applause.</p>
+      
+      <div class="clap-wrapper">
+        <button class="btn clap-btn" id="ovationBtn">
+          <span class="clap-icon">👏</span> Give it up for teachers
+        </button>
+        <div class="burst-field" id="burstField"></div>
+      </div>
+
+      <div class="applause-meter-card">
+        <div>
+          <span class="applause-metric" id="applauseDisplay">3,699</span>
+          <span class="applause-subtext">claps sent with love ❤️</span>
+        </div>
+        <div class="progress-shell">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <span class="meter-milestone" id="meterMilestone">Goal: 3,800 Claps</span>
+      </div>
+    </div>
+  </div>
+  <div class="wave-bottom">
+    <svg viewBox="0 0 1440 90" preserveAspectRatio="none"><path d="M0,40 C240,90 480,10 720,50 C960,90 1200,10 1440,40 L1440,90 L0,90 Z" fill="var(--yellow)"/></svg>
+  </div>
+</section>
+
+<!-- CLOSING -->
+<section class="closing">
+  <div class="confetti-fall" id="confettiFall"></div>
+  <div class="wrap">
+    <span class="star">
+      <svg width="40" height="40" viewBox="0 0 24 24" fill="var(--navy)"><path d="M12 2 L14.6 9.2 L22 12 L14.6 14.8 L12 22 L9.4 14.8 L2 12 L9.4 9.2 Z"/></svg>
+    </span>
+    <h2>Here&rsquo;s to year two.</h2>
+    <p class="sub">More puzzles. More Saturday mornings. More of you.</p>
+    <span class="foot-note">&mdash; LogIQids Educators Club, 3,699 teachers and counting</span>
+  </div>
+</section>
+
+<script>
+  var palette = ['#fde68a','#fca5a5','#93c5fd','#86efac','#d8b4fe'];
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Bouquet popup logic: Always shows upon page load/refresh
+  var bouquetOverlay = document.getElementById('bouquetOverlay');
+  var openBouquetBtn = document.getElementById('openBouquetBtn');
+
+  openBouquetBtn.addEventListener('click', function() {
+    // Closes modal for the current session only
+    bouquetOverlay.classList.add('hidden');
+
+    // Shower celebratory confetti when accepting bouquet
+    var centerX = window.innerWidth / 2;
+    var burstCount = reduceMotion ? 10 : 30;
+    for (var i = 0; i < burstCount; i++) {
+      setTimeout(function() {
+        makeConfettoAt(centerX, window.innerHeight / 2);
+      }, i * 20);
+    }
+  });
+
+  // scroll reveal for timeline + letter
+  var revealTargets = [document.getElementById('timeline'), document.getElementById('letter')];
+  var revealObserver = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if(entry.isIntersecting){
+        entry.target.classList.add('in-view');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.25 });
+  revealTargets.forEach(function(t){ if(t) revealObserver.observe(t); });
+
+  // count-up numbers
+  function easeOutCubic(t){ return 1 - Math.pow(1 - t, 3); }
+  function countUp(el){
+    var target = parseInt(el.getAttribute('data-target'), 10);
+    if(reduceMotion){ el.textContent = target.toLocaleString(); return; }
+    var start = null, duration = 1400;
+    function step(ts){
+      if(!start) start = ts;
+      var progress = Math.min((ts - start) / duration, 1);
+      var value = Math.round(target * easeOutCubic(progress));
+      el.textContent = value.toLocaleString();
+      if(progress < 1){ requestAnimationFrame(step); }
+    }
+    requestAnimationFrame(step);
+  }
+  var numbersEl = document.getElementById('numbers');
+  var numObserver = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if(entry.isIntersecting){
+        entry.target.querySelectorAll('.num').forEach(countUp);
+        numObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.4 });
+  if(numbersEl) numObserver.observe(numbersEl);
+
+  // riddle reveal
+  var revealBtn = document.getElementById('revealBtn');
+  var answerText = document.getElementById('answerText');
+  revealBtn.addEventListener('click', function(){
+    var showing = answerText.classList.toggle('show');
+    revealBtn.textContent = showing ? 'Hide the answer' : 'Reveal the answer';
+  });
+
+  // Applause Counter & Visual Progress Meter
+  var ovationBtn = document.getElementById('ovationBtn');
+  var burstField = document.getElementById('burstField');
+  var applauseDisplay = document.getElementById('applauseDisplay');
+  var progressFill = document.getElementById('progressFill');
+  var meterMilestone = document.getElementById('meterMilestone');
+
+  var baseClaps = 3699;
+  var targetMilestone = 3800;
+  var savedClaps = localStorage.getItem('logiqids_claps_v2');
+  var clapCount = savedClaps ? parseInt(savedClaps, 10) : baseClaps;
+
+  function updateApplauseVisual() {
+    applauseDisplay.textContent = clapCount.toLocaleString();
+    var progress = ((clapCount - baseClaps) / (targetMilestone - baseClaps)) * 100;
+    var percentage = Math.max(10, Math.min(100, progress));
+    progressFill.style.width = percentage + '%';
+
+    if (clapCount >= targetMilestone) {
+      meterMilestone.textContent = '🎉 Milestone reached! Teachers are loved!';
+      progressFill.style.background = 'linear-gradient(90deg, #86efac, #93c5fd, #d8b4fe)';
+    } else {
+      var remaining = (targetMilestone - clapCount).toLocaleString();
+      meterMilestone.textContent = remaining + ' more claps to reach 3,800!';
+    }
+  }
+
+  updateApplauseVisual();
+
+  function spawnFloatingBubble(originX) {
+    var bubble = document.createElement('span');
+    bubble.className = 'clap-bubble';
+    bubble.textContent = '+1 👏';
+    bubble.style.left = originX + 'px';
+    burstField.appendChild(bubble);
+    setTimeout(function() { bubble.remove(); }, 850);
+  }
+
+  function makeConfetto(originX){
+    var el = document.createElement('div');
+    var color = palette[Math.floor(Math.random() * palette.length)];
+    var isCircle = Math.random() > 0.5;
+    el.style.position = 'absolute';
+    el.style.left = originX + 'px';
+    el.style.top = '0px';
+    el.style.width = '10px';
+    el.style.height = '10px';
+    el.style.background = color;
+    el.style.borderRadius = isCircle ? '50%' : '3px';
+    el.style.pointerEvents = 'none';
+    var dx = (Math.random() - 0.5) * 260;
+    var dy = -(90 + Math.random() * 160);
+    var rot = (Math.random() - 0.5) * 500;
+    el.style.transition = reduceMotion ? 'none' : 'transform 1.15s cubic-bezier(.2,.7,.3,1), opacity 1.15s ease';
+    el.style.opacity = '1';
+    el.style.transform = 'translate(0,0) rotate(0deg)';
+    burstField.appendChild(el);
+    requestAnimationFrame(function(){
+      el.style.transform = 'translate(' + dx + 'px,' + dy + 'px) rotate(' + rot + 'deg)';
+      el.style.opacity = '0';
+    });
+    setTimeout(function(){ el.remove(); }, 1250);
+  }
+
+  function makeConfettoAt(x, y) {
+    var el = document.createElement('div');
+    var color = palette[Math.floor(Math.random() * palette.length)];
+    el.style.position = 'fixed';
+    el.style.left = x + 'px';
+    el.style.top = y + 'px';
+    el.style.width = '10px';
+    el.style.height = '10px';
+    el.style.background = color;
+    el.style.borderRadius = '50%';
+    el.style.pointerEvents = 'none';
+    el.style.zIndex = '10000';
+    var dx = (Math.random() - 0.5) * 450;
+    var dy = (Math.random() - 0.5) * 450;
+    el.style.transition = reduceMotion ? 'none' : 'transform 1.2s cubic-bezier(.2,.7,.3,1), opacity 1.2s ease';
+    el.style.opacity = '1';
+    document.body.appendChild(el);
+    requestAnimationFrame(function(){
+      el.style.transform = 'translate(' + dx + 'px,' + dy + 'px) rotate(360deg)';
+      el.style.opacity = '0';
+    });
+    setTimeout(function(){ el.remove(); }, 1250);
+  }
+
+  ovationBtn.addEventListener('click', function(){
+    clapCount++;
+    localStorage.setItem('logiqids_claps_v2', clapCount);
+
+    applauseDisplay.classList.add('bump');
+    setTimeout(function() { applauseDisplay.classList.remove('bump'); }, 150);
+
+    updateApplauseVisual();
+
+    var rect = ovationBtn.getBoundingClientRect();
+    var fieldRect = burstField.getBoundingClientRect();
+    var originX = rect.left - fieldRect.left + rect.width / 2;
+
+    spawnFloatingBubble(originX);
+
+    var count = reduceMotion ? 6 : 18;
+    for(var i = 0; i < count; i++){
+      setTimeout(function(){ makeConfetto(originX); }, i * 16);
+    }
+  });
+
+  // ambient falling confetti in closing section
+  if(!reduceMotion){
+    var confettiFall = document.getElementById('confettiFall');
+    var count = window.matchMedia('(max-width: 640px)').matches ? 12 : 22;
+    for(var i = 0; i < count; i++){
+      var s = document.createElement('span');
+      var color = palette[Math.floor(Math.random() * palette.length)];
+      s.style.background = color;
+      s.style.left = Math.random() * 100 + '%';
+      s.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
+      s.style.animationDuration = (5 + Math.random() * 6) + 's';
+      s.style.animationDelay = (Math.random() * 6) + 's';
+      confettiFall.appendChild(s);
+    }
+  }
+</script>
+
+</body>
+</html>
