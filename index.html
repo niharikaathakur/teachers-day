@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Thank You, Teachers — LogIQids Educators Club</title>
+<title>Thank You, Educators — LogIQids Educators Club</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito:wght@400;600;700;800&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
@@ -27,12 +27,11 @@
     --lilac: #e9d5ff;
     --sky: #bae6fd;
 
-    /* Light Tinted Backgrounds */
+    /* Section Backgrounds */
     --bg-hero: #fefce8;
-    --bg-time: #f0f9ff;
-    --bg-nums: #fff1f2;
-    --bg-letter: #faf5ff;
     --bg-puzzle: #ecfdf5;
+    --bg-time: #f0f9ff;
+    --bg-coming: #fdf4ff;
   }
 
   *{ box-sizing:border-box; }
@@ -44,6 +43,9 @@
     background:var(--bg-hero);
     overflow-x:hidden;
   }
+  body.modal-open {
+    overflow: hidden;
+  }
   h1,h2,.display{
     font-family:'Baloo 2',sans-serif;
     font-weight:700;
@@ -53,7 +55,7 @@
   }
   .signature{ font-family:'Caveat',cursive; font-weight:700; }
   p{ margin:0; }
-  .wrap{ max-width:700px; margin:0 auto; padding:0 28px; position:relative; z-index:2; }
+  .wrap{ max-width:720px; margin:0 auto; padding:0 28px; position:relative; z-index:2; }
 
   section{ position:relative; padding:110px 0 150px; overflow:hidden; }
   .wave-bottom{
@@ -117,15 +119,15 @@
   .bouquet-overlay {
     position: fixed;
     inset: 0;
-    background: rgba(254, 252, 232, 0.94);
-    backdrop-filter: blur(8px);
-    z-index: 9999;
+    background: rgba(254, 252, 232, 0.96);
+    backdrop-filter: blur(10px);
+    z-index: 99999;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 24px;
+    padding: 20px;
     opacity: 1;
-    transition: opacity 0.6s cubic-bezier(0.2, 0.8, 0.2, 1), visibility 0.6s;
+    transition: opacity 0.5s cubic-bezier(0.2, 0.8, 0.2, 1), visibility 0.5s;
   }
   .bouquet-overlay.hidden {
     opacity: 0;
@@ -135,11 +137,11 @@
   .bouquet-card {
     background: #ffffff;
     border-radius: 28px;
-    padding: 40px 32px 36px;
+    padding: 38px 28px;
     max-width: 440px;
     width: 100%;
     text-align: center;
-    box-shadow: 0 20px 45px -12px rgba(148, 163, 184, 0.25);
+    box-shadow: 0 24px 50px -10px rgba(148, 163, 184, 0.35);
     border: 3px solid var(--pink);
     position: relative;
     transform: scale(0.95);
@@ -149,13 +151,13 @@
     to { transform: scale(1); }
   }
   .bouquet-art {
-    width: 150px;
-    height: 150px;
-    margin: 0 auto 18px;
+    width: 140px;
+    height: 140px;
+    margin: 0 auto 16px;
     display: flex;
     align-items: center;
     justify-content: center;
-    filter: drop-shadow(0 10px 14px rgba(252, 165, 165, 0.3));
+    filter: drop-shadow(0 10px 14px rgba(252, 165, 165, 0.35));
     animation: floatBouquet 3s ease-in-out infinite alternate;
   }
   @keyframes floatBouquet {
@@ -170,14 +172,72 @@
     margin: 0 0 10px;
   }
   .bouquet-card p {
-    font-size: 1.05rem;
+    font-size: 1.02rem;
     color: var(--navy-soft);
     line-height: 1.6;
     margin-bottom: 24px;
   }
 
-  /* ---------- hero ---------- */
-  .hero{ min-height:88vh; display:flex; align-items:center; text-align:center; padding-top:70px; }
+  /* High-Visibility Pulsing Enter Button */
+  .btn-enter-modal {
+    display: inline-block;
+    width: 100%;
+    font-family: 'Baloo 2', sans-serif;
+    font-weight: 800;
+    font-size: 1.12rem;
+    color: var(--navy);
+    background: linear-gradient(135deg, var(--yellow), var(--coral));
+    border: 3px solid #ffffff;
+    padding: 16px 24px;
+    border-radius: 40px;
+    cursor: pointer;
+    box-shadow: 0 8px 24px -4px rgba(252, 165, 165, 0.8), 0 0 0 4px rgba(253, 230, 138, 0.5);
+    animation: pulseEnter 2s infinite;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: transform 0.2s ease;
+  }
+  .btn-enter-modal:hover {
+    transform: scale(1.03);
+  }
+  @keyframes pulseEnter {
+    0%, 100% {
+      box-shadow: 0 8px 24px -4px rgba(252, 165, 165, 0.8), 0 0 0 4px rgba(253, 230, 138, 0.6);
+    }
+    50% {
+      box-shadow: 0 12px 32px 0px rgba(252, 165, 165, 1), 0 0 0 9px rgba(253, 230, 138, 0.2);
+    }
+  }
+
+  /* ---------- curiosity teaser banner (at top) ---------- */
+  .curiosity-teaser {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #ffffff;
+    border: 2px solid var(--purple);
+    color: var(--navy);
+    padding: 9px 20px;
+    border-radius: 30px;
+    font-size: 0.94rem;
+    font-weight: 700;
+    margin-bottom: 24px;
+    box-shadow: 0 8px 18px -6px rgba(216, 180, 254, 0.5);
+    animation: teaserFloat 3s ease-in-out infinite;
+    cursor: default;
+  }
+  .curiosity-teaser .spark {
+    font-size: 1.15rem;
+    display: inline-block;
+    animation: spin2 5s linear infinite;
+  }
+  @keyframes teaserFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+  }
+
+  /* ---------- SECTION 1: HERO ---------- */
+  .hero{ min-height:88vh; display:flex; align-items:center; text-align:center; padding-top:60px; }
   .hero .wrap{ margin:0 auto; }
   .badge{
     display:inline-block;
@@ -189,7 +249,7 @@
     padding:10px 20px;
     border-radius:30px;
     transform:rotate(-3deg);
-    margin-bottom:34px;
+    margin-bottom:28px;
     box-shadow:0 8px 18px -8px rgba(253,230,138,0.7);
     animation:glowPulse 2.8s ease-in-out infinite;
   }
@@ -215,7 +275,7 @@
     color:var(--purple);
   }
 
-  /* ---------- section heading pattern ---------- */
+  /* General Headings */
   .kicker{
     font-family:'Baloo 2',sans-serif;
     font-weight:700;
@@ -227,11 +287,292 @@
   }
   .section-title{
     font-size:clamp(1.9rem, 4.2vw, 2.7rem);
-    max-width:16ch;
-    margin-bottom:50px;
+    max-width:24ch;
+    margin: 0 auto 40px;
+    text-align: center;
   }
 
-  /* ---------- timeline ---------- */
+  /* ---------- SECTION 2: PUZZLES & GREETING ---------- */
+  .puzzle-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+    max-width: 620px;
+    margin: 0 auto;
+  }
+  .puzzle-card {
+    background: #ffffff;
+    border: 2px solid var(--purple);
+    border-radius: 20px;
+    padding: 24px 24px;
+    text-align: left;
+    box-shadow: 0 8px 20px -8px rgba(0,0,0,0.06);
+    position: relative;
+    transition: border-color 0.3s ease;
+  }
+  .puzzle-card.card-solved {
+    border-color: #4ade80;
+    background: #fbfdfb;
+  }
+  .puzzle-badge {
+    font-family: 'Baloo 2', sans-serif;
+    font-weight: 700;
+    font-size: 0.8rem;
+    padding: 3px 12px;
+    border-radius: 12px;
+    background: var(--lilac);
+    color: var(--navy);
+    display: inline-block;
+    margin-bottom: 10px;
+  }
+  .puzzle-card .riddle {
+    color: var(--navy);
+    line-height: 1.65;
+    font-size: 1.02rem;
+    margin-bottom: 18px;
+  }
+  .letter-grid-display {
+    display: block;
+    background: var(--bg-time);
+    border: 1px dashed var(--blue);
+    padding: 10px 14px;
+    border-radius: 12px;
+    font-family: 'Baloo 2', sans-serif;
+    font-size: 1.12rem;
+    font-weight: 800;
+    letter-spacing: 2px;
+    color: var(--navy);
+    margin: 10px 0;
+    word-break: break-all;
+    text-align: center;
+  }
+
+  /* Interactive Guess Controls */
+  .puzzle-controls {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    margin-top: 14px;
+  }
+  .puzzle-input {
+    flex: 1 1 180px;
+    min-width: 140px;
+    padding: 10px 16px;
+    font-family: 'Baloo 2', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--navy);
+    background: #ffffff;
+    border: 2px solid var(--blue);
+    border-radius: 26px;
+    outline: none;
+    text-transform: uppercase;
+    transition: all 0.2s ease;
+  }
+  .puzzle-input:focus {
+    border-color: var(--purple);
+    box-shadow: 0 0 0 3px rgba(216, 180, 254, 0.4);
+  }
+  .puzzle-input.shake {
+    animation: shakeAnim 0.4s ease;
+    border-color: var(--coral);
+    background: #fff5f5;
+  }
+  @keyframes shakeAnim {
+    0%, 100% { transform: translateX(0); }
+    20%, 60% { transform: translateX(-6px); }
+    40%, 80% { transform: translateX(6px); }
+  }
+  .btn-check {
+    padding: 10px 20px;
+    font-size: 0.95rem;
+  }
+  .btn-reveal-text {
+    background: transparent;
+    border: none;
+    color: var(--navy-soft);
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.88rem;
+    font-weight: 700;
+    text-decoration: underline;
+    cursor: pointer;
+    padding: 4px 8px;
+    transition: color 0.2s ease;
+  }
+  .btn-reveal-text:hover {
+    color: var(--navy);
+  }
+  .feedback-text {
+    font-family: 'Baloo 2', sans-serif;
+    font-size: 0.94rem;
+    font-weight: 700;
+    margin-top: 8px;
+    display: none;
+  }
+  .feedback-text.correct {
+    display: block;
+    color: #15803d;
+  }
+  .feedback-text.incorrect {
+    display: block;
+    color: #e11d48;
+  }
+
+  /* Assembled Greeting Banner */
+  .assembly-banner {
+    background: #ffffff;
+    border: 2px dashed var(--coral);
+    border-radius: 24px;
+    padding: 28px 20px;
+    text-align: center;
+    margin: 36px auto 0;
+    max-width: 620px;
+    box-shadow: 0 10px 25px -10px rgba(252, 165, 165, 0.4);
+  }
+  .assembly-title {
+    font-family: 'Baloo 2', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 14px;
+  }
+  .slots-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+  }
+  .word-slot {
+    font-family: 'Baloo 2', sans-serif;
+    font-weight: 800;
+    font-size: 1.3rem;
+    padding: 8px 18px;
+    border-radius: 14px;
+    background: var(--bg-hero);
+    border: 2px solid var(--peach);
+    color: var(--navy-soft);
+    letter-spacing: 2px;
+    min-width: 95px;
+    transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  .word-slot.solved {
+    background: var(--green);
+    border-color: #4ade80;
+    color: var(--navy);
+    transform: scale(1.05);
+    box-shadow: 0 6px 14px -4px rgba(134, 239, 172, 0.7);
+  }
+  .final-celebration-msg {
+    font-family: 'Caveat', cursive;
+    font-size: 2.1rem;
+    font-weight: 700;
+    color: var(--coral);
+    margin-top: 16px;
+    display: none;
+  }
+  .final-celebration-msg.show {
+    display: block;
+    animation: popIn 0.45s cubic-bezier(.3,.9,.3,1.4);
+  }
+
+  /* Standard Buttons */
+  .btn{
+    position:relative;
+    overflow:hidden;
+    font-family:'Baloo 2',sans-serif; font-weight:700; font-size:1rem;
+    color:var(--navy); background:var(--coral); border:none;
+    padding:11px 24px; border-radius:30px; cursor:pointer;
+    transition:transform 0.2s cubic-bezier(.3,.9,.4,1.4), box-shadow 0.2s ease;
+    box-shadow:0 10px 22px -10px rgba(252,165,165,0.8);
+  }
+  .btn::after{
+    content:"";
+    position:absolute; top:0; left:-60%; width:40%; height:100%;
+    background:linear-gradient(120deg, transparent, rgba(255,255,255,0.6), transparent);
+    transform:skewX(-20deg);
+    animation:shimmer 3.4s ease-in-out infinite;
+    pointer-events:none;
+  }
+  .btn:hover{ transform:translateY(-3px) scale(1.04); }
+  .btn:active{ transform:translateY(0) scale(0.98); }
+  .btn-blue{ background:var(--blue); box-shadow:0 10px 22px -10px rgba(147,197,253,0.8); }
+
+  .answer{ margin-top:12px; color:var(--purple); font-weight:700; font-size:0.98rem; line-height:1.6; display:none; }
+  .answer.show{ display:block; animation:popIn 0.4s cubic-bezier(.3,.9,.3,1.4); }
+  @keyframes popIn{ 0%{ transform:scale(0.85); opacity:0; } 100%{ transform:scale(1); opacity:1; } }
+
+  /* Applause Meter */
+  .ovation-row { margin-top:56px; text-align:center; position: relative; }
+  .ovation-row p { color:var(--navy-soft); margin-bottom:16px; font-weight:600; }
+  .clap-wrapper { position: relative; display: inline-block; }
+  
+  .clap-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 1.05rem;
+    padding: 14px 28px;
+  }
+  .clap-icon { font-size: 1.3rem; display: inline-block; transition: transform 0.15s ease; }
+  .clap-btn:active .clap-icon { transform: scale(1.3) rotate(-10deg); }
+
+  .clap-bubble {
+    position: absolute;
+    left: 50%;
+    top: -12px;
+    pointer-events: none;
+    font-family: 'Baloo 2', sans-serif;
+    font-weight: 800;
+    font-size: 1.05rem;
+    color: var(--navy);
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 2px 10px;
+    box-shadow: 0 6px 14px rgba(0,0,0,0.1);
+    animation: floatUp 0.85s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+    z-index: 10;
+  }
+  @keyframes floatUp {
+    0% { transform: translate(-50%, 0) scale(0.8); opacity: 0; }
+    25% { opacity: 1; transform: translate(-50%, -18px) scale(1.1); }
+    100% { transform: translate(-50%, -50px) scale(0.9); opacity: 0; }
+  }
+
+  .applause-meter-card {
+    margin: 22px auto 0;
+    max-width: 280px;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(10px);
+    border: 2px solid #ffffff;
+    border-radius: 20px;
+    padding: 14px 20px;
+    box-shadow: 0 10px 25px -8px rgba(0, 0, 0, 0.05);
+  }
+  .applause-metric {
+    font-family: 'Baloo 2', sans-serif;
+    font-weight: 800;
+    font-size: 2.1rem;
+    color: var(--navy);
+    line-height: 1;
+    display: inline-block;
+    transition: transform 0.15s ease, color 0.15s ease;
+  }
+  .applause-metric.bump {
+    transform: scale(1.18);
+    color: #e06d6d;
+  }
+  .applause-subtext {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--navy-soft);
+    display: block;
+    margin-top: 4px;
+  }
+  .burst-field{ position:relative; height:0; }
+
+  /* ---------- SECTION 3: YEAR RECAP ---------- */
   .timeline{ position:relative; padding-left:38px; }
   .timeline-line{
     position:absolute; left:8px; top:6px; bottom:6px; width:4px;
@@ -246,9 +587,9 @@
   .tl-item{ position:relative; padding-bottom:48px; opacity:0; transform:translateY(14px) scale(0.96); transition:opacity 0.5s ease, transform 0.5s cubic-bezier(.3,.9,.3,1.2); }
   .timeline.in-view .tl-item{ opacity:1; transform:translateY(0) scale(1); }
   .timeline.in-view .tl-item:nth-child(1){ transition-delay:0.15s; }
-  .timeline.in-view .tl-item:nth-child(2){ transition-delay:0.5s; }
-  .timeline.in-view .tl-item:nth-child(3){ transition-delay:0.85s; }
-  .timeline.in-view .tl-item:nth-child(4){ transition-delay:1.2s; }
+  .timeline.in-view .tl-item:nth-child(2){ transition-delay:0.4s; }
+  .timeline.in-view .tl-item:nth-child(3){ transition-delay:0.65s; }
+  .timeline.in-view .tl-item:nth-child(4){ transition-delay:0.9s; }
   .tl-item:last-child{ padding-bottom:0; }
   .tl-item::before{
     content:""; position:absolute; left:-38px; top:4px;
@@ -273,12 +614,37 @@
   .tl-item .tl-date{
     font-family:'Baloo 2',sans-serif; font-weight:700;
     color:var(--dot,var(--blue));
-    font-size:1.05rem; display:block; margin-bottom:6px;
+    font-size:1.15rem; display:block; margin-bottom:6px;
   }
-  .tl-item p{ color:var(--navy-soft); line-height:1.65; max-width:50ch; font-size:1.03rem; }
+  .tl-item p{ color:var(--navy-soft); line-height:1.65; max-width:52ch; font-size:1.02rem; }
 
-  /* ---------- numbers ---------- */
-  .numbers{ display:flex; flex-wrap:wrap; gap:50px 60px; justify-content:center; text-align:center; }
+  .tl-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 14px;
+  }
+  .tl-tag {
+    font-family: 'Baloo 2', sans-serif;
+    font-weight: 700;
+    font-size: 0.82rem;
+    padding: 4px 12px;
+    border-radius: 16px;
+    color: var(--navy);
+    display: inline-block;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  }
+  .tag-sky { background: var(--sky); }
+  .tag-mint { background: var(--mint); }
+  .tag-purple { background: var(--purple); }
+  .tag-yellow { background: var(--yellow); }
+  .tag-peach { background: var(--peach); }
+  .tag-coral { background: var(--coral); }
+  .tag-lilac { background: var(--lilac); }
+  .tag-green { background: var(--green); }
+
+  /* Numbers Sub-section */
+  .numbers{ display:flex; flex-wrap:wrap; gap:40px 60px; justify-content:center; text-align:center; margin-top:60px; padding-top:40px; border-top: 2px dashed rgba(147, 197, 253, 0.5); }
   .stat{ position:relative; transition:transform 0.3s ease; }
   .stat:nth-child(1){ transform:rotate(-2deg); }
   .stat:nth-child(2){ transform:rotate(1.4deg); }
@@ -294,159 +660,132 @@
   .stat:nth-child(3) .num{ color:var(--green); }
   .stat .label{ font-size:0.98rem; color:var(--navy-soft); margin-top:6px; display:block; font-weight:600; }
 
-  /* ---------- letter ---------- */
-  .letter p{
-    color:var(--navy-soft); line-height:1.75; font-size:1.08rem; max-width:58ch; margin-bottom:22px;
-    opacity:0; transform:translateY(16px); transition:opacity 0.6s ease, transform 0.6s ease;
+  /* ---------- SECTION 4: WHAT'S FOR THE COMING YEAR ---------- */
+  .section-coming-year {
+    background: var(--bg-coming);
+    text-align: center;
   }
-  .letter.in-view p{ opacity:1; transform:translateY(0); }
-  .letter.in-view p:nth-of-type(1){ transition-delay:0.05s; }
-  .letter.in-view p:nth-of-type(2){ transition-delay:0.25s; }
-  .letter.in-view p:nth-of-type(3){ transition-delay:0.45s; }
-  .letter.in-view p:nth-of-type(4){ transition-delay:0.65s; }
-  .letter p:last-of-type{ margin-bottom:0; }
-  .sign-off{ margin-top:44px; opacity:0; transform:translateY(16px); transition:opacity 0.6s ease 0.85s, transform 0.6s ease 0.85s; }
-  .letter.in-view .sign-off{ opacity:1; transform:translateY(0); }
-  .sign-off .signature{ font-size:2rem; color:var(--purple); display:block; }
-  .sign-off .role{ color:var(--navy-soft); font-size:0.92rem; margin-top:2px; display:block; }
-
-  /* ---------- puzzle box ---------- */
-  .puzzle-box{
-    position:relative;
-    border-radius:22px;
-    padding:3px;
-    max-width:540px;
-    background:conic-gradient(from var(--ang,0deg), var(--yellow), var(--coral), var(--pink), var(--purple), var(--blue), var(--mint), var(--green), var(--yellow));
-    animation:spin 6s linear infinite;
-  }
-  @keyframes spin{ to{ --ang:360deg; } }
-  @property --ang{ syntax:'<angle>'; inherits:false; initial-value:0deg; }
-  .puzzle-box-inner{
-    background:var(--bg-puzzle);
-    border-radius:20px;
-    padding:32px 28px;
-  }
-  .puzzle-box-inner .riddle{ color:var(--navy-soft); line-height:1.65; font-size:1.05rem; margin-bottom:22px; }
-  .btn{
-    position:relative;
-    overflow:hidden;
-    font-family:'Baloo 2',sans-serif; font-weight:700; font-size:1rem;
-    color:var(--navy); background:var(--coral); border:none;
-    padding:13px 26px; border-radius:30px; cursor:pointer;
-    transition:transform 0.2s cubic-bezier(.3,.9,.4,1.4), box-shadow 0.2s ease;
-    box-shadow:0 10px 22px -10px rgba(252,165,165,0.8);
-  }
-  .btn::after{
-    content:"";
-    position:absolute; top:0; left:-60%; width:40%; height:100%;
-    background:linear-gradient(120deg, transparent, rgba(255,255,255,0.6), transparent);
-    transform:skewX(-20deg);
-    animation:shimmer 3.4s ease-in-out infinite;
-    pointer-events:none;
-  }
-  .btn:hover{ transform:translateY(-3px) scale(1.04); }
-  .btn:active{ transform:translateY(0) scale(0.98); }
-  .btn-blue{ background:var(--blue); box-shadow:0 10px 22px -10px rgba(147,197,253,0.8); }
-
-  .answer{ margin-top:18px; color:var(--purple); font-weight:700; font-size:1.03rem; line-height:1.6; display:none; }
-  .answer.show{ display:block; animation:popIn 0.4s cubic-bezier(.3,.9,.3,1.4); }
-  @keyframes popIn{ 0%{ transform:scale(0.85); opacity:0; } 100%{ transform:scale(1); opacity:1; } }
-
-  /* ---------- applause counter & visual meter ---------- */
-  .ovation-row { margin-top:56px; text-align:center; position: relative; }
-  .ovation-row p { color:var(--navy-soft); margin-bottom:16px; font-weight:600; }
-  .clap-wrapper { position: relative; display: inline-block; }
-  
-  .clap-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 1.05rem;
-    padding: 14px 28px;
-  }
-  .clap-icon { font-size: 1.3rem; display: inline-block; transition: transform 0.15s ease; }
-  .clap-btn:active .clap-icon { transform: scale(1.3) rotate(-10deg); }
-
-  /* Floating +1 Bubble */
-  .clap-bubble {
-    position: absolute;
-    left: 50%;
-    top: -12px;
-    pointer-events: none;
-    font-family: 'Baloo 2', sans-serif;
-    font-weight: 800;
-    font-size: 1.05rem;
-    color: var(--navy);
+  .coming-card {
     background: #ffffff;
-    border-radius: 20px;
-    padding: 2px 10px;
-    box-shadow: 0 6px 14px rgba(0,0,0,0.1);
-    animation: floatUp 0.85s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
-    z-index: 10;
-  }
-  @keyframes floatUp {
-    0% { transform: translate(-50%, 0) scale(0.8); opacity: 0; }
-    25% { opacity: 1; transform: translate(-50%, -18px) scale(1.1); }
-    100% { transform: translate(-50%, -50px) scale(0.9); opacity: 0; }
-  }
-
-  /* Cheer Progress Card */
-  .applause-meter-card {
-    margin: 24px auto 0;
-    max-width: 320px;
-    background: rgba(255, 255, 255, 0.85);
-    backdrop-filter: blur(10px);
-    border: 2px solid #ffffff;
-    border-radius: 20px;
-    padding: 18px 22px;
-    box-shadow: 0 10px 25px -8px rgba(0, 0, 0, 0.05);
-  }
-  .applause-metric {
-    font-family: 'Baloo 2', sans-serif;
-    font-weight: 800;
-    font-size: 2rem;
-    color: var(--navy);
-    line-height: 1;
-    display: inline-block;
-    transition: transform 0.15s ease, color 0.15s ease;
-  }
-  .applause-metric.bump {
-    transform: scale(1.18);
-    color: #e06d6d;
-  }
-  .applause-subtext {
-    font-size: 0.9rem;
-    font-weight: 700;
-    color: var(--navy-soft);
-    display: block;
-    margin-top: 4px;
-  }
-
-  .progress-shell {
-    width: 100%;
-    height: 12px;
-    background: #e2e8f0;
-    border-radius: 20px;
-    margin: 14px 0 8px;
-    overflow: hidden;
+    border-radius: 28px;
+    padding: 42px 36px;
+    border: 2px solid var(--purple);
+    box-shadow: 0 18px 40px -14px rgba(216, 180, 254, 0.4);
+    text-align: left;
+    margin: 20px auto 0;
+    max-width: 660px;
     position: relative;
   }
-  .progress-fill {
-    height: 100%;
-    width: 0%;
-    background: linear-gradient(90deg, var(--yellow), var(--coral), var(--purple));
-    border-radius: 20px;
-    transition: width 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+  .coming-card-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 22px;
   }
-  .meter-milestone {
-    font-size: 0.82rem;
+  .coming-app-icon {
+    width: 62px;
+    height: 62px;
+    border-radius: 18px;
+    background: linear-gradient(135deg, var(--yellow), var(--coral));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.85rem;
+    box-shadow: 0 8px 16px -4px rgba(252, 165, 165, 0.6);
+    flex-shrink: 0;
+  }
+  .coming-card-header h3 {
+    font-family: 'Baloo 2', sans-serif;
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: var(--navy);
+    margin: 0;
+  }
+  .coming-card-header .app-badge-pill {
+    display: inline-block;
+    font-size: 0.8rem;
     font-weight: 700;
+    background: var(--lilac);
+    color: var(--navy);
+    padding: 2px 10px;
+    border-radius: 12px;
+    margin-top: 4px;
+  }
+  .coming-prose {
     color: var(--navy-soft);
+    font-size: 1.03rem;
+    line-height: 1.75;
+    margin-bottom: 18px;
+  }
+  .coming-callout {
+    font-family: 'Baloo 2', sans-serif;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--navy);
+    margin: 22px 0 12px;
+  }
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 12px;
+    margin: 16px 0 26px;
+  }
+  .feature-item {
+    background: var(--bg-time);
+    border-radius: 16px;
+    padding: 14px 16px;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .feature-item .icon { font-size: 1.25rem; line-height: 1; margin-top: 2px; }
+  .feature-item .text { font-size: 0.95rem; font-weight: 700; color: var(--navy); line-height: 1.45; }
+
+  .access-box {
+    background: var(--bg-hero);
+    border-left: 4px solid var(--yellow);
+    border-radius: 12px;
+    padding: 16px 18px;
+    font-size: 0.98rem;
+    color: var(--navy);
+    line-height: 1.6;
+    margin-top: 22px;
+  }
+  .access-box strong { color: #b45309; }
+
+  /* ---------- ground-filling moving & fading hearts ---------- */
+  #heartsContainer {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 7000;
+    overflow: hidden;
+  }
+  .ground-heart {
+    position: absolute;
+    width: 28px;
+    height: 28px;
+    pointer-events: none;
+    transition: top 2.1s cubic-bezier(0.25, 0.9, 0.4, 1), transform 0.4s ease;
+    filter: drop-shadow(0 3px 6px rgba(0,0,0,0.06));
+    opacity: 0.92;
+  }
+  .ground-heart svg {
+    width: 100%;
+    height: 100%;
     display: block;
   }
-  .burst-field{ position:relative; height:0; }
+  @keyframes heartGentleFloat {
+    0% { transform: translateY(0px) rotate(var(--r, 0deg)); }
+    50% { transform: translateY(-9px) rotate(calc(var(--r, 0deg) + 9deg)) scale(1.08); }
+    100% { transform: translateY(0px) rotate(var(--r, 0deg)); }
+  }
+  .ground-heart.settled {
+    animation: heartGentleFloat 3.2s ease-in-out infinite alternate;
+    animation-delay: var(--delay, 0s);
+  }
 
-  /* ---------- closing ---------- */
+  /* ---------- SECTION 5: CLOSING ---------- */
   .closing{
     text-align:center; padding-bottom:90px;
     background:linear-gradient(120deg, var(--yellow), var(--coral), var(--pink), var(--purple), var(--blue), var(--sky), var(--mint), var(--green), var(--yellow));
@@ -472,23 +811,34 @@
     section{ padding:80px 0 110px; }
     .numbers{ gap:34px 34px; }
     .piece{ transform:scale(0.7); }
-    .bouquet-card{ padding:30px 22px; }
+    .bouquet-card{ padding:30px 20px; }
+    .coming-card { padding: 26px 20px; }
+    .ground-heart { width: 23px; height: 23px; }
+    .word-slot { font-size: 1.15rem; padding: 6px 14px; min-width: 80px; }
+    .curiosity-teaser { font-size: 0.84rem; padding: 7px 14px; }
+    .puzzle-controls { flex-direction: column; align-items: stretch; }
+    .btn-check { width: 100%; }
   }
 
   @media (prefers-reduced-motion: reduce){
     *{ animation:none !important; transition:none !important; }
     html{ scroll-behavior:auto; }
-    .tl-item, .letter p, .sign-off{ opacity:1 !important; transform:none !important; }
+    .tl-item, .sign-off{ opacity:1 !important; transform:none !important; }
     .timeline-line{ transform:scaleY(1) !important; }
     .sparkle{ opacity:0.7 !important; }
     .tl-item::after{ opacity:0.3 !important; transform:none !important; }
     .bouquet-art{ animation:none; }
+    .ground-heart.settled{ animation:none !important; }
+    .btn-enter-modal { animation:none !important; }
   }
 </style>
 </head>
-<body>
+<body class="modal-open">
 
-<!-- BOUQUET OPENING MODAL (REAPPEARS EVERY REFRESH) -->
+<!-- ENTIRE GROUND CONTAINER FOR MOVING & FADING HEARTS -->
+<div id="heartsContainer"></div>
+
+<!-- BOUQUET OPENING MODAL (RELOADS ON EVERY REFRESH) -->
 <div class="bouquet-overlay" id="bouquetOverlay">
   <div class="bouquet-card">
     <div class="bouquet-art">
@@ -506,10 +856,8 @@
         <circle cx="74" cy="46" r="12" fill="#fbcfe8"/>
         <circle cx="86" cy="46" r="12" fill="#fbcfe8"/>
         <circle cx="80" cy="52" r="9" fill="#fed7aa"/>
-        <!-- Left Lavender Tulip -->
         <path d="M42,50 C42,32 66,32 66,50 C66,62 42,62 42,50 Z" fill="#d8b4fe"/>
         <circle cx="54" cy="46" r="6" fill="#e9d5ff"/>
-        <!-- Right Sky-blue Daisy -->
         <circle cx="108" cy="48" r="16" fill="#93c5fd"/>
         <circle cx="108" cy="48" r="8" fill="#fde68a"/>
         <!-- Leaves -->
@@ -522,10 +870,12 @@
         <path d="M78,120 L72,136 M82,120 L88,136" stroke="#fca5a5" stroke-width="3" stroke-linecap="round"/>
       </svg>
     </div>
-    <h3>A Bouquet for You, Teacher! 💐</h3>
+    <h3>A Bouquet for You, Educator! 💐</h3>
     <p>Happy Teachers' Day! LogIQids Educators Club is celebrating 1 year today, and this special token of gratitude is for you.</p>
-    <button class="btn btn-blue" id="openBouquetBtn" style="font-size:1.05rem; padding:14px 32px;">
-      Accept Bouquet & Enter 🌸
+    
+    <!-- HIGH-VISIBILITY UNMISTAKABLE BUTTON -->
+    <button class="btn-enter-modal" id="openBouquetBtn">
+      👉 Click here to Accept Bouquet & Enter 🌸
     </button>
   </div>
 </div>
@@ -537,9 +887,12 @@
   <symbol id="sparkle" viewBox="0 0 24 24">
     <path d="M12 0 C12 6 14 10 20 12 C14 14 12 18 12 24 C12 18 10 14 4 12 C10 10 12 6 12 0 Z"/>
   </symbol>
+  <symbol id="heart-icon" viewBox="0 0 24 24">
+    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+  </symbol>
 </svg>
 
-<!-- HERO -->
+<!-- SECTION 1: HERO -->
 <section class="hero" style="background:var(--bg-hero);">
   <div class="blob" style="width:340px;height:340px;background:var(--yellow);top:-80px;left:-100px;"></div>
   <div class="blob" style="width:280px;height:280px;background:var(--blue);bottom:-60px;right:-80px;animation-delay:-4s;"></div>
@@ -557,78 +910,198 @@
   <span class="sparkle" style="bottom:10%;right:32%;width:16px;height:16px;color:var(--peach);animation-delay:-1.6s;"><svg viewBox="0 0 24 24" fill="currentColor"><use href="#sparkle"/></svg></span>
 
   <div class="wrap">
+    
+    <!-- CURIOSITY INDUCING TOP INDICATOR -->
+    <div>
+      <div class="curiosity-teaser">
+        <span class="spark">✨</span> Scroll till the end to disclose what's in for the coming year... 🎁
+      </div>
+    </div>
+
     <span class="badge">LogIQids Educators Club</span>
-    <h1>Thank you, <span class="hl">teachers.</span></h1>
-    <p class="sub">This Teachers&rsquo; Day, our little community turns one &mdash; and every bit of what it became belongs to you.</p>
+    <h1>Thank you, <span class="hl">educators.</span></h1>
+    <p class="sub">This Teachers&rsquo; Day, our community space turns one &mdash; and every bit of what we shared belongs to you.</p>
     <span class="stamp">Sept 5, 2025 &rarr; Sept 5, 2026</span>
   </div>
 
   <div class="wave-bottom">
     <svg viewBox="0 0 1440 90" preserveAspectRatio="none">
-      <defs><linearGradient id="waveHero" x1="0" y1="0" x2="1" y2="0">
-        <stop offset="0%" style="stop-color:var(--sky)"/>
-        <stop offset="100%" style="stop-color:var(--blue)"/>
-      </linearGradient></defs>
-      <path d="M0,40 C240,90 480,0 720,30 C960,60 1200,10 1440,50 L1440,90 L0,90 Z" fill="url(#waveHero)"/>
+      <path d="M0,40 C240,90 480,0 720,30 C960,60 1200,10 1440,50 L1440,90 L0,90 Z" fill="var(--bg-puzzle)"/>
     </svg>
   </div>
 </section>
 
-<!-- JOURNEY -->
+<!-- SECTION 2: 3 CLUES AND THE GREETING -->
+<section style="background:var(--bg-puzzle);">
+  <svg class="piece" style="width:54px;height:54px;top:8%;right:8%;color:var(--purple);--r:-10deg;" viewBox="-25 -25 150 150"><use href="#piece"/></svg>
+  <svg class="piece" style="width:40px;height:40px;bottom:14%;left:8%;color:var(--coral);--r:16deg;animation-delay:-2.5s;" viewBox="-25 -25 150 150"><use href="#piece"/></svg>
+  <span class="sparkle" style="top:16%;left:14%;width:18px;height:18px;color:var(--pink);animation-delay:-0.8s;"><svg viewBox="0 0 24 24" fill="currentColor"><use href="#sparkle"/></svg></span>
+  <span class="sparkle" style="bottom:20%;right:16%;width:16px;height:16px;color:var(--sky);animation-delay:-1.9s;"><svg viewBox="0 0 24 24" fill="currentColor"><use href="#sparkle"/></svg></span>
+  
+  <div class="wrap">
+    <span class="kicker" style="background:var(--green);color:var(--navy);">A Little Brain Teaser</span>
+    <h2 class="section-title">Solve the 3 clues to assemble the message</h2>
+
+    <!-- 1. The 3 Clue Cards -->
+    <div class="puzzle-stack">
+      
+      <!-- Clue 1: Rearrange Sets to form TEACHERS (ALWAYS Fills Middle Box: slot-teachers) -->
+      <div class="puzzle-card" id="card1">
+        <span class="puzzle-badge">Clue 1 of 3</span>
+        <p class="riddle">
+          Rearrange the letters in <strong>Set A</strong>, <strong>Set B</strong>, or <strong>Set C</strong> and place them in the blanks to form a meaningful word. Which word will be formed?<br><br>
+          <strong>Word:</strong> &nbsp;<code>_ E _ _ _ _ R S</code><br><br>
+          <strong>Set A:</strong> H K F E A<br>
+          <strong>Set B:</strong> R E M B N<br>
+          <strong>Set C:</strong> A C H T E
+        </p>
+        <div class="puzzle-controls">
+          <input type="text" class="puzzle-input" id="input1" placeholder="Type answer (8 letters)..." autocomplete="off" />
+          <button class="btn btn-blue btn-check" onclick="checkPuzzle(1, ['TEACHERS', 'TEACHER\'S'], 'slot-teachers', 'TEACHER\'S')">Check</button>
+          <button class="btn-reveal-text" onclick="revealPuzzle(1, 'slot-teachers', 'TEACHER\'S', 'TEACHERS (Set C: A C H T E placed into _ E _ _ _ _ R S forms TEACHERS)')">Reveal clue</button>
+        </div>
+        <p class="feedback-text" id="fb1"></p>
+        <p class="answer" id="ans1"></p>
+      </div>
+
+      <!-- Clue 2: Numeric Cipher for HAPPY (ALWAYS Fills Left Box: slot-happy) -->
+      <div class="puzzle-card" id="card2">
+        <span class="puzzle-badge">Clue 2 of 3</span>
+        <p class="riddle">
+          If <strong>LEMON</strong> is coded as <strong>12-5-13-15-14</strong> and <strong>OLIVE</strong> is coded as <strong>15-12-9-22-5</strong>, what word would have been coded as <strong>8-1-16-16-25</strong>?
+        </p>
+        <div class="puzzle-controls">
+          <input type="text" class="puzzle-input" id="input2" placeholder="Type answer (5 letters)..." autocomplete="off" />
+          <button class="btn btn-blue btn-check" onclick="checkPuzzle(2, ['HAPPY'], 'slot-happy', 'HAPPY')">Check</button>
+          <button class="btn-reveal-text" onclick="revealPuzzle(2, 'slot-happy', 'HAPPY', 'HAPPY (H=8, A=1, P=16, P=16, Y=25)')">Reveal clue</button>
+        </div>
+        <p class="feedback-text" id="fb2"></p>
+        <p class="answer" id="ans2"></p>
+      </div>
+
+      <!-- Clue 3: Hidden Word for DAY (ALWAYS Fills Right Box: slot-day) -->
+      <div class="puzzle-card" id="card3">
+        <span class="puzzle-badge">Clue 3 of 3</span>
+        <p class="riddle">
+          Find the 3-letter meaningful word hidden in the given sequence of letters:
+          <span class="letter-grid-display">BGTEQNMYDAYKLUWMTD</span>
+        </p>
+        <div class="puzzle-controls">
+          <input type="text" class="puzzle-input" id="input3" placeholder="Type 3-letter word..." autocomplete="off" />
+          <button class="btn btn-blue btn-check" onclick="checkPuzzle(3, ['DAY'], 'slot-day', 'DAY')">Check</button>
+          <button class="btn-reveal-text" onclick="revealPuzzle(3, 'slot-day', 'DAY', 'DAY (Hidden inside BGTEQNMYDAYKLUWMTD)')">Reveal clue</button>
+        </div>
+        <p class="feedback-text" id="fb3"></p>
+        <p class="answer" id="ans3"></p>
+      </div>
+
+    </div>
+
+    <!-- 2. The Assembled Greeting Banner (Guaranteed Order: HAPPY -> TEACHER'S -> DAY) -->
+    <div class="assembly-banner" id="assemblyBanner">
+      <div class="assembly-title">✨ Put the 3 clues together to reveal the greeting:</div>
+      <div class="slots-wrapper">
+        <!-- 1st Box (Left): Always HAPPY -->
+        <div class="word-slot" id="slot-happy">? ? ? ? ?</div>
+        <!-- 2nd Box (Middle): Always TEACHER'S -->
+        <div class="word-slot" id="slot-teachers">? ? ? ? ? ? ? ?</div>
+        <!-- 3rd Box (Right): Always DAY -->
+        <div class="word-slot" id="slot-day">? ? ?</div>
+      </div>
+      <div class="final-celebration-msg" id="finalCelebrationMsg">
+        🎉 Happy Teacher's Day! 🎉
+      </div>
+    </div>
+
+    <!-- Applause Card -->
+    <div class="ovation-row">
+      <p>Got a second? Send our educators a little applause.</p>
+      
+      <div class="clap-wrapper">
+        <button class="btn clap-btn" id="ovationBtn">
+          <span class="clap-icon">👏</span> Give it up for educators
+        </button>
+        <div class="burst-field" id="burstField"></div>
+      </div>
+
+      <div class="applause-meter-card">
+        <span class="applause-metric" id="applauseDisplay">0</span>
+        <span class="applause-subtext">claps sent with love ❤️</span>
+      </div>
+    </div>
+  </div>
+  <div class="wave-bottom">
+    <svg viewBox="0 0 1440 90" preserveAspectRatio="none">
+      <path d="M0,50 C240,10 480,90 720,50 C960,10 1200,80 1440,30 L1440,90 L0,90 Z" fill="var(--bg-time)"/>
+    </svg>
+  </div>
+</section>
+
+<!-- SECTION 3: YEAR RECAP -->
 <section style="background:var(--bg-time);">
   <svg class="piece" style="width:44px;height:44px;top:9%;right:9%;color:var(--sky);--r:12deg;" viewBox="-25 -25 150 150"><use href="#piece"/></svg>
   <svg class="piece" style="width:36px;height:36px;bottom:12%;left:6%;color:var(--purple);--r:-14deg;animation-delay:-3.5s;" viewBox="-25 -25 150 150"><use href="#piece"/></svg>
   <span class="sparkle" style="top:18%;left:12%;width:20px;height:20px;color:var(--pink);animation-delay:-1s;"><svg viewBox="0 0 24 24" fill="currentColor"><use href="#sparkle"/></svg></span>
   <span class="sparkle" style="bottom:22%;right:14%;width:16px;height:16px;color:var(--mint);animation-delay:-2s;"><svg viewBox="0 0 24 24" fill="currentColor"><use href="#sparkle"/></svg></span>
   <span class="sparkle" style="top:44%;right:5%;width:14px;height:14px;color:var(--yellow);animation-delay:-0.5s;"><svg viewBox="0 0 24 24" fill="currentColor"><use href="#sparkle"/></svg></span>
+  
   <div class="wrap">
-    <span class="kicker" style="background:var(--blue);color:var(--navy);">Looking back</span>
+    <span class="kicker" style="background:var(--blue);color:var(--navy);">Looking Back</span>
     <h2 class="section-title">How the year unfolded</h2>
+    
     <div class="timeline" id="timeline">
       <div class="timeline-line"></div>
-      <div class="tl-item">
-        <span class="tl-date">Sept 5, 2025</span>
-        <p>A small circle of teachers who loved a good puzzle as much as their students did. LogIQids Educators Club was born, on Teachers&rsquo; Day, of all days.</p>
-      </div>
-      <div class="tl-item">
-        <span class="tl-date">Week one</span>
-        <p>The first Puzzle of the Week landed on a Saturday morning. Nobody was quite sure if a room full of educators would stop to solve riddles on a weekend &mdash; you did, over your Saturday chai.</p>
-      </div>
-      <div class="tl-item">
-        <span class="tl-date">All year long</span>
-        <p>A new puzzle, every Saturday, without fail. And every time, you showed up &mdash; solving, comparing answers, sneaking a few onto your own classroom board.</p>
-      </div>
-      <div class="tl-item">
-        <span class="tl-date">Today</span>
-        <p>3,699 teachers strong. Still one community. Still endlessly curious.</p>
-      </div>
-    </div>
-  </div>
-  <div class="wave-bottom">
-    <svg viewBox="0 0 1440 90" preserveAspectRatio="none">
-      <defs><linearGradient id="waveJourney" x1="0" y1="0" x2="1" y2="0">
-        <stop offset="0%" style="stop-color:var(--peach)"/>
-        <stop offset="100%" style="stop-color:var(--coral)"/>
-      </linearGradient></defs>
-      <path d="M0,50 C240,10 480,90 720,50 C960,10 1200,80 1440,30 L1440,90 L0,90 Z" fill="url(#waveJourney)"/>
-    </svg>
-  </div>
-</section>
 
-<!-- NUMBERS -->
-<section style="background:var(--bg-nums);">
-  <div class="blob" style="width:260px;height:260px;background:var(--coral);top:-60px;right:-70px;opacity:0.3;"></div>
-  <svg class="piece" style="width:50px;height:50px;top:10%;left:6%;color:var(--blue);--r:10deg;" viewBox="-25 -25 150 150"><use href="#piece"/></svg>
-  <svg class="piece" style="width:44px;height:44px;bottom:10%;right:10%;color:var(--yellow);--r:-12deg;animation-delay:-3s;" viewBox="-25 -25 150 150"><use href="#piece"/></svg>
-  <span class="sparkle" style="top:14%;right:20%;width:18px;height:18px;color:var(--lilac);animation-delay:-1.2s;"><svg viewBox="0 0 24 24" fill="currentColor"><use href="#sparkle"/></svg></span>
-  <span class="sparkle" style="bottom:16%;left:18%;width:16px;height:16px;color:var(--sky);animation-delay:-2.3s;"><svg viewBox="0 0 24 24" fill="currentColor"><use href="#sparkle"/></svg></span>
-  <div class="wrap">
-    <span class="kicker" style="background:var(--coral);color:var(--navy);">In one year</span>
-    <h2 class="section-title">The tally on the board</h2>
+      <!-- Phase 1 -->
+      <div class="tl-item">
+        <span class="tl-date">Weekly Brain Teasers & Weekend Rituals</span>
+        <p>Every Saturday morning, we shared curated logic puzzles and student brain teasers straight to the community—giving educators quick mental challenges to enjoy over weekend chai and sketch onto classroom boards.</p>
+        <div class="tl-tags">
+          <span class="tl-tag tag-sky">Puzzle of the Week</span>
+          <span class="tl-tag tag-yellow">Student Logic Puzzles & Brain Boosters</span>
+        </div>
+      </div>
+
+      <!-- Phase 2 -->
+      <div class="tl-item">
+        <span class="tl-date">Masterclasses & Pedagogy Toolkits</span>
+        <p>We delivered actionable pedagogical resources and masterclass breakdowns directly to your fingertips, helping streamline everyday lesson plans, tech adoption, and classroom flow.</p>
+        <div class="tl-tags">
+          <span class="tl-tag tag-purple">Teach Like a Champion (TLAC) Video Masterclasses</span>
+          <span class="tl-tag tag-peach">Teaching Tools 101</span>
+          <span class="tl-tag tag-mint">Classroom Management & Pedagogy Toolkits</span>
+        </div>
+      </div>
+
+      <!-- Phase 3 -->
+      <div class="tl-item">
+        <span class="tl-date">Educator Well-Being & Inclusive Classrooms</span>
+        <p>Recognizing the immense mental load of teaching, we shared dedicated guides focused on self-care, preventing burnout, supporting introverted learners, and accommodating neurodiverse minds.</p>
+        <div class="tl-tags">
+          <span class="tl-tag tag-pink">Educator Well-Being & Burnout Prevention</span>
+          <span class="tl-tag tag-lilac">The Quiet Side of Learning</span>
+          <span class="tl-tag tag-coral">Classroom Inclusivity & Neurodiversity Series</span>
+        </div>
+      </div>
+
+      <!-- Phase 4 -->
+      <div class="tl-item">
+        <span class="tl-date">Ready-to-Use Printables & Community Growth</span>
+        <p>We rolled out plug-and-play classroom activities, curriculum-aligned printables, and celebratory milestones as our private community grew across hundreds of school campuses.</p>
+        <div class="tl-tags">
+          <span class="tl-tag tag-green">Classroom Games & Interactive Activities</span>
+          <span class="tl-tag tag-sky">CBSE Aligned Curriculum Worksheets & Printables</span>
+          <span class="tl-tag tag-yellow">Community Programs & Milestones</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- The Tally On The Board -->
     <div class="numbers" id="numbers">
       <div class="stat">
         <span class="stat-spark"><svg viewBox="0 0 24 24" fill="currentColor"><use href="#sparkle"/></svg></span>
-        <span class="num" data-target="3699">0</span><span class="label">teachers in the club</span>
+        <span class="num" data-target="3700">0</span><span class="label">educators in the club</span>
       </div>
       <div class="stat">
         <span class="stat-spark"><svg viewBox="0 0 24 24" fill="currentColor"><use href="#sparkle"/></svg></span>
@@ -639,95 +1112,88 @@
         <span class="num" data-target="52">0</span><span class="label">Saturdays, 52 puzzles</span>
       </div>
     </div>
+
   </div>
+  
   <div class="wave-bottom">
     <svg viewBox="0 0 1440 90" preserveAspectRatio="none">
-      <defs><linearGradient id="waveNumbers" x1="0" y1="0" x2="1" y2="0">
-        <stop offset="0%" style="stop-color:var(--lilac)"/>
-        <stop offset="100%" style="stop-color:var(--purple)"/>
-      </linearGradient></defs>
-      <path d="M0,30 C240,80 480,0 720,40 C960,80 1200,20 1440,60 L1440,90 L0,90 Z" fill="url(#waveNumbers)"/>
+      <path d="M0,30 C240,80 480,0 720,40 C960,80 1200,20 1440,60 L1440,90 L0,90 Z" fill="var(--bg-coming)"/>
     </svg>
   </div>
 </section>
 
-<!-- LETTER -->
-<section class="letter" id="letter" style="background:var(--bg-letter);">
-  <div class="blob" style="width:200px;height:200px;background:var(--lilac);top:-40px;right:-60px;opacity:0.35;"></div>
-  <div class="blob" style="width:160px;height:160px;background:var(--pink);bottom:0;left:-60px;opacity:0.25;animation-delay:-5s;"></div>
-  <span class="sparkle" style="top:8%;left:6%;width:18px;height:18px;color:var(--pink);animation-delay:-1.5s;"><svg viewBox="0 0 24 24" fill="currentColor"><use href="#sparkle"/></svg></span>
-  <span class="sparkle" style="bottom:14%;right:8%;width:16px;height:16px;color:var(--sky);animation-delay:-2.2s;"><svg viewBox="0 0 24 24" fill="currentColor"><use href="#sparkle"/></svg></span>
+<!-- SECTION 4: WHAT'S FOR THE COMING YEAR -->
+<section class="section-coming-year">
   <div class="wrap">
-    <span class="kicker" style="background:var(--purple);color:var(--navy);">A note to you</span>
-    <h2 class="section-title">Before we say anything else</h2>
-    <p>When we started this club, we hoped a handful of teachers might enjoy a puzzle on a Saturday morning. We didn&rsquo;t expect a community.</p>
-    <p>But that is exactly what you built. Every time you solved something before your first cup of coffee finished, forwarded a puzzle to a colleague down the hall, or told us it ended up sketched on your classroom board &mdash; you turned a small idea into something we&rsquo;re genuinely proud of.</p>
-    <p>Teaching is the hardest kind of problem-solving there is, done every single day, for other people&rsquo;s children, often with far too little thanks. So today, just for a moment, we wanted to turn that around.</p>
-    <p>Thank you for showing up. Thank you for staying curious. Thank you for being the kind of teacher who still makes time for a good puzzle.</p>
-    <div class="sign-off">
-      <span class="signature">With gratitude,</span>
-      <span class="signature">The LogIQids Team</span>
-    </div>
-  </div>
-  <div class="wave-bottom">
-    <svg viewBox="0 0 1440 90" preserveAspectRatio="none">
-      <defs><linearGradient id="waveLetter" x1="0" y1="0" x2="1" y2="0">
-        <stop offset="0%" style="stop-color:var(--mint)"/>
-        <stop offset="100%" style="stop-color:var(--green)"/>
-      </linearGradient></defs>
-      <path d="M0,60 C240,10 480,90 720,40 C960,0 1200,70 1440,20 L1440,90 L0,90 Z" fill="url(#waveLetter)"/>
-    </svg>
-  </div>
-</section>
+    <span class="kicker" style="background:var(--purple);color:var(--navy);">Looking Ahead</span>
+    <h2 class="section-title">What&rsquo;s for the coming year</h2>
 
-<!-- INTERACTIVE -->
-<section style="background:var(--bg-puzzle);">
-  <svg class="piece" style="width:54px;height:54px;top:8%;right:8%;color:var(--purple);--r:-10deg;" viewBox="-25 -25 150 150"><use href="#piece"/></svg>
-  <svg class="piece" style="width:40px;height:40px;bottom:14%;left:8%;color:var(--coral);--r:16deg;animation-delay:-2.5s;" viewBox="-25 -25 150 150"><use href="#piece"/></svg>
-  <span class="sparkle" style="top:16%;left:14%;width:18px;height:18px;color:var(--pink);animation-delay:-0.8s;"><svg viewBox="0 0 24 24" fill="currentColor"><use href="#sparkle"/></svg></span>
-  <span class="sparkle" style="bottom:20%;right:16%;width:16px;height:16px;color:var(--sky);animation-delay:-1.9s;"><svg viewBox="0 0 24 24" fill="currentColor"><use href="#sparkle"/></svg></span>
-  <div class="wrap">
-    <span class="kicker" style="background:var(--green);color:var(--navy);">One more, for the road</span>
-    <h2 class="section-title">A tiny puzzle, just for you</h2>
-
-    <div class="puzzle-box">
-      <div class="puzzle-box-inner">
-        <p class="riddle">I have keys but no locks. I have space but no rooms. You can enter, but you can never go outside. What am I?</p>
-        <button class="btn btn-blue" id="revealBtn">Reveal the answer</button>
-        <p class="answer" id="answerText">A keyboard. Of course you got it &mdash; puzzle-solving is basically your second job now.</p>
-      </div>
-    </div>
-
-    <!-- Applause & Cheer Meter -->
-    <div class="ovation-row">
-      <p>Got a second? Send the club a little applause.</p>
-      
-      <div class="clap-wrapper">
-        <button class="btn clap-btn" id="ovationBtn">
-          <span class="clap-icon">👏</span> Give it up for teachers
-        </button>
-        <div class="burst-field" id="burstField"></div>
-      </div>
-
-      <!-- Cheer Progress Card starting from 0 -->
-      <div class="applause-meter-card">
+    <div class="coming-card">
+      <div class="coming-card-header">
+        <div class="coming-app-icon">💡</div>
         <div>
-          <span class="applause-metric" id="applauseDisplay">0</span>
-          <span class="applause-subtext">claps sent with love ❤️</span>
+          <h3>Surprise Reveal</h3>
+          <span class="app-badge-pill">A Pocket Companion for Educators</span>
         </div>
-        <div class="progress-shell">
-          <div class="progress-fill" id="progressFill" style="width: 0%;"></div>
+      </div>
+
+      <p class="coming-prose">
+        Computational Thinking is becoming an essential skill for every student. As AI and CT find their place in classrooms, teachers need practical, classroom-ready resources to bring these concepts to life. Drawing on over a decade of experience in Computational Thinking and Logical Reasoning, we created this community to bridge the gap between curriculum and classroom.
+      </p>
+
+      <p class="coming-prose">
+        Over the past year, you turned those resources into meaningful classroom experiences. Every worksheet explored, every strategy implemented, and every discussion sparked has helped make learning richer for countless students. Thank you for your trust, your curiosity, and your commitment to continuous learning. It has been a privilege to be a part of your journey.
+      </p>
+
+      <p class="coming-callout">
+        Your support and encouragement inspired us to take the next step.
+      </p>
+
+      <p class="coming-prose">
+        Introducing the <strong>LogIQids For Teachers app</strong>—a dedicated platform to help educators confidently learn, implement, and teach Computational Thinking at their own pace.
+      </p>
+
+      <div class="coming-callout" style="margin-top:14px;">The app includes:</div>
+
+      <div class="features-grid">
+        <div class="feature-item">
+          <span class="icon">📄</span>
+          <span class="text">Exclusive LogIQids worksheets</span>
         </div>
-        <span class="meter-milestone" id="meterMilestone">Goal: 50 Claps</span>
+        <div class="feature-item">
+          <span class="icon">🎓</span>
+          <span class="text">Four CPD-compliant professional development courses</span>
+        </div>
+        <div class="feature-item">
+          <span class="icon">🧩</span>
+          <span class="text">Daily CT quizzes and thinking challenges</span>
+        </div>
+        <div class="feature-item">
+          <span class="icon">🤝</span>
+          <span class="text">Help from the LogIQids Academic Team</span>
+        </div>
+        <div class="feature-item" style="grid-column: 1 / -1;">
+          <span class="icon">📘</span>
+          <span class="text">Grade-wise CT modules aligned with CBSE handbooks</span>
+        </div>
+      </div>
+
+      <p class="coming-prose" style="font-weight:700; color:var(--navy);">
+        Thank you for making this first year truly meaningful. Here's to empowering more teachers, inspiring more young thinkers, and growing together in the years ahead.
+      </p>
+
+      <div class="access-box">
+        🔑 <strong>Campus Access:</strong> Simply reach out to your <strong>LogIQids School Relationship Manager</strong> to unlock complimentary access for your educators and receive your onboarding steps!
       </div>
     </div>
   </div>
+
   <div class="wave-bottom">
     <svg viewBox="0 0 1440 90" preserveAspectRatio="none"><path d="M0,40 C240,90 480,10 720,50 C960,90 1200,10 1440,40 L1440,90 L0,90 Z" fill="var(--yellow)"/></svg>
   </div>
 </section>
 
-<!-- CLOSING -->
+<!-- SECTION 5: CLOSING -->
 <section class="closing">
   <div class="confetti-fall" id="confettiFall"></div>
   <div class="wrap">
@@ -736,23 +1202,26 @@
     </span>
     <h2>Here&rsquo;s to year two.</h2>
     <p class="sub">More puzzles. More Saturday mornings. More of you.</p>
-    <span class="foot-note">&mdash; LogIQids Educators Club, 3,699 teachers and counting</span>
+    <span class="foot-note">&mdash; LogIQids Educators Club, 3,700 educators and counting</span>
   </div>
 </section>
 
 <script>
   var palette = ['#fde68a','#fca5a5','#93c5fd','#86efac','#d8b4fe'];
+  var heartPalette = ['#fca5a5','#fbcfe8','#d8b4fe','#fde68a','#93c5fd','#a7f3d0','#fed7aa'];
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  // Bouquet popup logic: Always shows upon page load/refresh
+  // Bouquet popup logic: Reappears every time the page refreshes
   var bouquetOverlay = document.getElementById('bouquetOverlay');
   var openBouquetBtn = document.getElementById('openBouquetBtn');
 
   openBouquetBtn.addEventListener('click', function() {
-    // Closes modal for the current session only
     bouquetOverlay.classList.add('hidden');
+    document.body.classList.remove('modal-open');
 
-    // Shower celebratory confetti when accepting bouquet
+    // Ensure the user always starts at the top
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+
     var centerX = window.innerWidth / 2;
     var burstCount = reduceMotion ? 10 : 30;
     for (var i = 0; i < burstCount; i++) {
@@ -762,8 +1231,8 @@
     }
   });
 
-  // scroll reveal for timeline + letter
-  var revealTargets = [document.getElementById('timeline'), document.getElementById('letter')];
+  // scroll reveal for timeline
+  var timelineEl = document.getElementById('timeline');
   var revealObserver = new IntersectionObserver(function(entries){
     entries.forEach(function(entry){
       if(entry.isIntersecting){
@@ -771,8 +1240,8 @@
         revealObserver.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.25 });
-  revealTargets.forEach(function(t){ if(t) revealObserver.observe(t); });
+  }, { threshold: 0.2 });
+  if (timelineEl) revealObserver.observe(timelineEl);
 
   // count-up numbers
   function easeOutCubic(t){ return 1 - Math.pow(1 - t, 3); }
@@ -800,41 +1269,102 @@
   }, { threshold: 0.4 });
   if(numbersEl) numObserver.observe(numbersEl);
 
-  // riddle reveal
-  var revealBtn = document.getElementById('revealBtn');
-  var answerText = document.getElementById('answerText');
-  revealBtn.addEventListener('click', function(){
-    var showing = answerText.classList.toggle('show');
-    revealBtn.textContent = showing ? 'Hide the answer' : 'Reveal the answer';
+  // Interactive Puzzle Check & Reveal Logic
+  var finalCelebrationMsg = document.getElementById('finalCelebrationMsg');
+
+  function checkAssemblyComplete() {
+    var sHappy = document.getElementById('slot-happy').classList.contains('solved');
+    var sTeachers = document.getElementById('slot-teachers').classList.contains('solved');
+    var sDay = document.getElementById('slot-day').classList.contains('solved');
+
+    if (sHappy && sTeachers && sDay) {
+      finalCelebrationMsg.classList.add('show');
+      var bannerRect = document.getElementById('assemblyBanner').getBoundingClientRect();
+      var centerX = bannerRect.left + bannerRect.width / 2;
+      var centerY = bannerRect.top + window.scrollY + bannerRect.height / 2;
+      for (var i = 0; i < 28; i++) {
+        setTimeout(function() {
+          makeConfettoAt(centerX, centerY - window.scrollY);
+        }, i * 20);
+      }
+    }
+  }
+
+  function checkPuzzle(id, validAnswers, slotId, displayWord) {
+    var input = document.getElementById('input' + id);
+    var card = document.getElementById('card' + id);
+    var fb = document.getElementById('fb' + id);
+    var slot = document.getElementById(slotId);
+
+    var userVal = input.value.trim().toUpperCase().replace(/[\s-]/g, '');
+    var isCorrect = validAnswers.some(function(ans) {
+      return ans.toUpperCase().replace(/[\s-]/g, '') === userVal;
+    });
+
+    if (isCorrect) {
+      fb.className = 'feedback-text correct';
+      fb.textContent = '🎉 Correct! Word added to greeting!';
+      card.classList.add('card-solved');
+      slot.textContent = displayWord;
+      slot.classList.add('solved');
+      input.disabled = true;
+      checkAssemblyComplete();
+    } else {
+      input.classList.add('shake');
+      setTimeout(function() { input.classList.remove('shake'); }, 450);
+      fb.className = 'feedback-text incorrect';
+      fb.textContent = 'Not quite! Give it another try or check the clue.';
+    }
+  }
+
+  function revealPuzzle(id, slotId, displayWord, explanation) {
+    var card = document.getElementById('card' + id);
+    var input = document.getElementById('input' + id);
+    var slot = document.getElementById(slotId);
+    var ans = document.getElementById('ans' + id);
+    var fb = document.getElementById('fb' + id);
+
+    ans.classList.add('show');
+    ans.innerHTML = 'Answer: <strong>' + explanation + '</strong>';
+    fb.style.display = 'none';
+
+    card.classList.add('card-solved');
+    slot.textContent = displayWord;
+    slot.classList.add('solved');
+    input.value = displayWord;
+    input.disabled = true;
+
+    checkAssemblyComplete();
+  }
+
+  // Allow pressing "Enter" on puzzle inputs
+  [1, 2, 3].forEach(function(num) {
+    var input = document.getElementById('input' + num);
+    if (input) {
+      input.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          if (num === 1) checkPuzzle(1, ['TEACHERS', 'TEACHER\'S'], 'slot-teachers', 'TEACHER\'S');
+          if (num === 2) checkPuzzle(2, ['HAPPY'], 'slot-happy', 'HAPPY');
+          if (num === 3) checkPuzzle(3, ['DAY'], 'slot-day', 'DAY');
+        }
+      });
+    }
   });
 
-  // Applause Counter & Visual Progress Meter
-  // Applause Counter & Visual Progress Meter (Starts from 0)
+  // Applause Counter
   var ovationBtn = document.getElementById('ovationBtn');
   var burstField = document.getElementById('burstField');
   var applauseDisplay = document.getElementById('applauseDisplay');
-  var progressFill = document.getElementById('progressFill');
-  var meterMilestone = document.getElementById('meterMilestone');
+  var heartsContainer = document.getElementById('heartsContainer');
 
-  var targetMilestone = 50; // Reachable goal
-  var savedClaps = localStorage.getItem('logiqids_claps_v3');
+  var savedClaps = localStorage.getItem('logiqids_claps_v5');
   var clapCount = savedClaps ? parseInt(savedClaps, 10) : 0;
 
   function updateApplauseVisual() {
     applauseDisplay.textContent = clapCount.toLocaleString();
-    var percentage = Math.min(100, (clapCount / targetMilestone) * 100);
-    progressFill.style.width = percentage + '%';
-
-    if (clapCount >= targetMilestone) {
-      meterMilestone.textContent = '🎉 Milestone reached! Teachers are loved!';
-      progressFill.style.background = 'linear-gradient(90deg, #86efac, #93c5fd, #d8b4fe)';
-    } else {
-      var remaining = targetMilestone - clapCount;
-      meterMilestone.textContent = remaining + ' more claps to reach 50!';
-    }
   }
 
-  // Set initial state (shows 0 until first click)
   updateApplauseVisual();
 
   function spawnFloatingBubble(originX) {
@@ -846,9 +1376,100 @@
     setTimeout(function() { bubble.remove(); }, 850);
   }
 
-  ovationBtn.addEventListener('click', function() {
+  // Entire ground drop & moving hearts with automatic disappearance
+  function dropGroundHeart() {
+    var heart = document.createElement('div');
+    heart.className = 'ground-heart';
+
+    var xPercent = 1.5 + Math.random() * 95;
+    var restingBottom = 8 + (Math.random() * 50);
+    var targetTop = window.innerHeight - restingBottom - 28;
+
+    var rot = (Math.random() - 0.5) * 60;
+    var delay = (Math.random() * 2).toFixed(2);
+    var color = heartPalette[Math.floor(Math.random() * heartPalette.length)];
+
+    heart.style.left = xPercent + '%';
+    heart.style.top = '-35px';
+    heart.style.setProperty('--r', rot + 'deg');
+    heart.style.setProperty('--delay', delay + 's');
+    heart.innerHTML = '<svg fill="' + color + '"><use href="#heart-icon"/></svg>';
+
+    heartsContainer.appendChild(heart);
+
+    requestAnimationFrame(function() {
+      heart.style.top = targetTop + 'px';
+      heart.style.transform = 'rotate(' + rot + 'deg)';
+    });
+
+    setTimeout(function() {
+      heart.classList.add('settled');
+    }, 2150);
+
+    var lifetime = 6000 + (Math.random() * 2500);
+    setTimeout(function() {
+      heart.style.transition = 'opacity 1s ease, transform 1s ease';
+      heart.style.opacity = '0';
+      heart.style.transform = 'translateY(15px) scale(0.6)';
+      setTimeout(function() {
+        heart.remove();
+      }, 1000);
+    }, lifetime);
+  }
+
+  function makeConfetto(originX){
+    var el = document.createElement('div');
+    var color = palette[Math.floor(Math.random() * palette.length)];
+    var isCircle = Math.random() > 0.5;
+    el.style.position = 'absolute';
+    el.style.left = originX + 'px';
+    el.style.top = '0px';
+    el.style.width = '10px';
+    el.style.height = '10px';
+    el.style.background = color;
+    el.style.borderRadius = isCircle ? '50%' : '3px';
+    el.style.pointerEvents = 'none';
+    var dx = (Math.random() - 0.5) * 260;
+    var dy = -(90 + Math.random() * 160);
+    var rot = (Math.random() - 0.5) * 500;
+    el.style.transition = reduceMotion ? 'none' : 'transform 1.15s cubic-bezier(.2,.7,.3,1), opacity 1.15s ease';
+    el.style.opacity = '1';
+    el.style.transform = 'translate(0,0) rotate(0deg)';
+    burstField.appendChild(el);
+    requestAnimationFrame(function(){
+      el.style.transform = 'translate(' + dx + 'px,' + dy + 'px) rotate(' + rot + 'deg)';
+      el.style.opacity = '0';
+    });
+    setTimeout(function(){ el.remove(); }, 1250);
+  }
+
+  function makeConfettoAt(x, y) {
+    var el = document.createElement('div');
+    var color = palette[Math.floor(Math.random() * palette.length)];
+    el.style.position = 'fixed';
+    el.style.left = x + 'px';
+    el.style.top = y + 'px';
+    el.style.width = '10px';
+    el.style.height = '10px';
+    el.style.background = color;
+    el.style.borderRadius = '50%';
+    el.style.pointerEvents = 'none';
+    el.style.zIndex = '10000';
+    var dx = (Math.random() - 0.5) * 450;
+    var dy = (Math.random() - 0.5) * 450;
+    el.style.transition = reduceMotion ? 'none' : 'transform 1.2s cubic-bezier(.2,.7,.3,1), opacity 1.2s ease';
+    el.style.opacity = '1';
+    document.body.appendChild(el);
+    requestAnimationFrame(function(){
+      el.style.transform = 'translate(' + dx + 'px,' + dy + 'px) rotate(360deg)';
+      el.style.opacity = '0';
+    });
+    setTimeout(function(){ el.remove(); }, 1250);
+  }
+
+  ovationBtn.addEventListener('click', function(){
     clapCount++;
-    localStorage.setItem('logiqids_claps_v3', clapCount);
+    localStorage.setItem('logiqids_claps_v5', clapCount);
 
     applauseDisplay.classList.add('bump');
     setTimeout(function() { applauseDisplay.classList.remove('bump'); }, 150);
@@ -861,9 +1482,16 @@
 
     spawnFloatingBubble(originX);
 
-    var count = reduceMotion ? 6 : 18;
-    for (var i = 0; i < count; i++) {
-      setTimeout(function() { makeConfetto(originX); }, i * 16);
+    var count = reduceMotion ? 4 : 12;
+    for(var i = 0; i < count; i++){
+      setTimeout(function(){ makeConfetto(originX); }, i * 16);
+    }
+
+    var dropCount = reduceMotion ? 3 : 8;
+    for (var h = 0; h < dropCount; h++) {
+      setTimeout(function() {
+        dropGroundHeart();
+      }, h * 90);
     }
   });
 
